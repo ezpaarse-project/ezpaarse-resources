@@ -480,6 +480,14 @@
       "Crypted-Fields": "none"
     }
   },
+  "01-fr-univ-limoges-02": {
+    "fullName": "Université de Limoges - 2025",
+    "country": "FR",
+    "headers": {
+      "Log-Format-ezproxy": "%u;%{ezproxy-session}i;%h;%t;%s;%b;\"%U\";%{statut}<.*>;%{affectation}<.*>;%{RNE_composante}<[\\d{7}A-Z]*>;%{label_composante}<.*>;%{RNE_composante_sec}<[\\d{7}A-Z]*>;%{affectation_sec}<.*>;%{label_composante_sec}<.*>;%{employeur}<.*>;%{annee}<[\\d{4}]*>;%{code_etape}<[\\w-]*>;%{label_etape}<.*>;%{niveau}<.*>",
+      "Crypted-Fields": "none"
+    }
+  },
   "01-fr-univ-montpellier": {
     "fullName": "BIU de Montpellier",
     "country": "FR",
