@@ -113,9 +113,16 @@
       "istex-ttl": "3600",
       "Crypted-Fields": "none",
       "crossref-enrich": "false",
-      "ezPAARSE-Middlewares": "(before istex) user-agent-parser",
+      "ezPAARSE-Middlewares": "(before istex) user-agent-parser | (after istex) cut,ip-to-abesid,idp-to-abesid,abesid-to-etab",
       "Log-Format-apache": "%h %<\"?>%{istex-id}<[^ ]+?>%<\"?> %<\"?>%{owner}<[^\"]+>%<\"?> %<\"?>%{idp}<[^\"]+>%<\"?> %u %t \"%{method}<[A-Z]+> %U %<[^ ]+>\" %{status}<[0-9\\-]+> %b \"%{referer}<[^\"]+>\" \"%{user-agent}<[^\"]+>\" %{sid}<[^ ]+> %<\"?>%{auth}<[^ \"]+>%<\"?>",
-      "Output-Fields": "+login,+istex_rtype,+istex_genre,+ark,-platform,+publisher_name,+language,+publication_date,+subject,-identd,-domain,+doi-publication-date-year,+istex_bundle_size"
+      "Output-Fields": "+login,+istex_rtype,+istex_genre,+ark,+publisher_name,+language,+publication_date,+subject,+doi-publication-date-year,+istex_bundle_size,+access_type,+oa_status,+abes-id,+institutionName,-platform,-identd,-domain",
+      "ip-to-abesid-source-field": "host",
+      "ip-to-abesid-enriched-field": "abes-id",
+      "abesid-to-etab-source-field": "abes-id",
+      "abesid-to-etab-enriched-fields": "{ \"Nom Etablissement\": \"institutionName\" }",
+      "idp-to-abesid-enriched-field": "abes-id",
+      "idp-to-abesid-source-field": "istex-id",
+      "extract": "istex-id=>/^ABES.*/=>abes-id"
     }
   },
   "00-fr-istex-1": {
