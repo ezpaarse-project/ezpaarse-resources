@@ -122,7 +122,8 @@
       "abesid-to-etab-enriched-fields": "{ \"Nom Etablissement\": \"institutionName\" }",
       "idp-to-abesid-enriched-field": "abes-id",
       "idp-to-abesid-source-field": "istex-id",
-      "extract": "istex-id=>/^(ABES.*)/=>abes-id"
+      "extract": "istex-id=>/^(ABES.*)/=>abes-id",
+      "istex-cache": false
     }
   },
   "00-fr-istex-1": {
