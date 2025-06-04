@@ -123,7 +123,7 @@
       "idp-to-abesid-enriched-field": "abes-id",
       "idp-to-abesid-source-field": "istex-id",
       "extract": "istex-id=>/^(ABES.*)/=>abes-id",
-      "istex-cache": false
+      "istex-cache": "false"
     }
   },
   "00-fr-istex-1": {
