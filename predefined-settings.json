@@ -111,7 +111,7 @@
       "Force-Parser": "istex",
       "istex-enrich": "true",
       "istex-ttl": "3600",
-      "Crypted-Fields": "none",
+      "Crypted-Fields": "host",
       "crossref-enrich": "false",
       "ezPAARSE-Middlewares": "(before istex) user-agent-parser | (after istex) cut,ip-to-abesid,idp-to-abesid,abesid-to-etab",
       "Log-Format-apache": "%h %<\"?>%{istex-id}<[^ ]+?>%<\"?> %<\"?>%{owner}<[^\"]+>%<\"?> %<\"?>%{idp}<[^\"]+>%<\"?> %u %t \"%{method}<[A-Z]+> %U %<[^ ]+>\" %{status}<[0-9\\-]+> %b \"%{referer}<[^\"]+>\" \"%{user-agent}<[^\"]+>\" %{sid}<[^ ]+> %<\"?>%{auth}<[^ \"]+>%<\"?>",
@@ -123,7 +123,6 @@
       "idp-to-abesid-enriched-field": "abes-id",
       "idp-to-abesid-source-field": "istex-id",
       "extract": "istex-id=>/^(ABES.*)/=>abes-id",
-      "Crypted-Fields": "host",
       "istex-cache": "false"
     }
   },
