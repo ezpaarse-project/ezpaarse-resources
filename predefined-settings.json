@@ -123,6 +123,7 @@
       "idp-to-abesid-enriched-field": "abes-id",
       "idp-to-abesid-source-field": "istex-id",
       "extract": "istex-id=>/^(ABES.*)/=>abes-id",
+      "Crypted-Fields": "host",
       "istex-cache": "false"
     }
   },
