@@ -573,6 +573,14 @@
       "Crypted-Fields": "none"
     }
   },
+ "01-fr-univ-sorbonne-02" : {
+  "fullName": "Université Paris Sorbonne - nouvelle version",
+  "country": "FR",
+  "headers": {
+    "Log-Format-ezproxy": "%h|%u|%{ezproxy-session}i|%{session-eduPersonAffiliation}<.*?>|%{session-supannRefId}<[a-zA-Z\\- ]*>|%{session-uid}<[a-zA-Z0-9]+>|%{ezproxy-groups}<[a-zA-Z0-9\\-_\\+]*>|%t|\"%r\"|%s|%b|%{domain-port}<[a-zA-Z0-9\\-\\.]+:[0-9]+>|%{referer}<.*>|%{execution-time}<[0-9]+>",
+    "Crypted-Fields": "none"
+  }
+ },
   "01-fr-univ-dauphine": {
     "fullName": "Université Paris Dauphine",
     "country": "FR",
