@@ -111,7 +111,7 @@
       "Force-Parser": "istex",
       "istex-enrich": "true",
       "istex-ttl": "3600",
-      "Crypted-Fields": "none",
+      "Crypted-Fields": "host",
       "crossref-enrich": "false",
       "ezPAARSE-Middlewares": "(before istex) user-agent-parser | (after istex) cut,ip-to-abesid,idp-to-abesid,abesid-to-etab",
       "Log-Format-apache": "%h %<\"?>%{istex-id}<[^ ]+?>%<\"?> %<\"?>%{owner}<[^\"]+>%<\"?> %<\"?>%{idp}<[^\"]+>%<\"?> %u %t \"%{method}<[A-Z]+> %U %<[^ ]+>\" %{status}<[0-9\\-]+> %b \"%{referer}<[^\"]+>\" \"%{user-agent}<[^\"]+>\" %{sid}<[^ ]+> %<\"?>%{auth}<[^ \"]+>%<\"?>",
@@ -122,8 +122,7 @@
       "abesid-to-etab-enriched-fields": "{ \"Nom Etablissement\": \"institutionName\" }",
       "idp-to-abesid-enriched-field": "abes-id",
       "idp-to-abesid-source-field": "istex-id",
-      "extract": "istex-id=>/^(ABES.*)/=>abes-id",
-      "istex-cache": "false"
+      "extract": "istex-id=>/^(ABES.*)/=>abes-id"
     }
   },
   "00-fr-istex-1": {
@@ -511,7 +510,7 @@
     "fullName": "Université de Limoges - 2025",
     "country": "FR",
     "headers": {
-      "Log-Format-ezproxy": "%u;%{ezproxy-session}i;%h;%t;%s;%b;\"%U\";%{statut}<.*>;%{affectation}<.*>;%{RNE_composante}<[\\d{7}A-Z]*>;%{label_composante}<.*>;%{RNE_composante_sec}<[\\d{7}A-Z]*>;%{affectation_sec}<.*>;%{label_composante_sec}<.*>;%{employeur}<.*>;%{annee}<[\\d{4}]*>;%{code_etape}<[\\w-]*>;%{label_etape}<.*>;%{niveau}<.*>",
+      "Log-Format-ezproxy": "%u;%{ezproxy-session}i;%h;%t;%s;%b;\"%U\";%{statut}<.*?>;%{affectation}<.*?>;%{RNE_composante}<[\\d{7}A-Z]*>;%{label_composante}<.*?>;%{RNE_composante_sec}<[\\d{7}A-Z, ]*>;%{affectation_sec}<.*?>;%{label_composante_sec}<.*?>;%{employeur}<.*?>;%{annee}<[\\d{4}]*>;%{code_etape}<[\\w-]*>;%{label_etape}<.*?>;%{niveau}<.*?>",
       "Crypted-Fields": "none"
     }
   },
@@ -593,6 +592,14 @@
       "Crypted-Fields": "none"
     }
   },
+ "01-fr-univ-sorbonne-02" : {
+  "fullName": "Université Paris Sorbonne - nouvelle version",
+  "country": "FR",
+  "headers": {
+    "Log-Format-ezproxy": "%h|%u|%{ezproxy-session}i|%{session-eduPersonAffiliation}<.*?>|%{session-supannRefId}<[a-zA-Z\\- ]*>|%{session-uid}<[a-zA-Z0-9]*>|%{ezproxy-groups}<[a-zA-Z0-9\\-_\\+]*>|%t|\"%r\"|%s|%b|%{domain-port}<[a-zA-Z0-9\\-\\.]+:[0-9]+>|%{referer}<.*>|%{execution-time}<[0-9]+>",
+    "Crypted-Fields": "none"
+  }
+ },
   "01-fr-univ-dauphine": {
     "fullName": "Université Paris Dauphine",
     "country": "FR",
