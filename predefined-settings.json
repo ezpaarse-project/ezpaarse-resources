@@ -942,14 +942,21 @@
     "fullName": "Sciences Po Paris ez01",
     "country": "FR",
     "headers": {
-      "Log-Format-ezproxy": "%h %l %{session-uid}<.*> %u %t \"%r\" %s %b \"%{referer}<.*>\" \"%{user-agent}<.*>\" %{ezproxy-session} %{ezproxy-groups}<.*> %{ezproxy-usrvar1}<.*> %{ezproxy-usrvar2}i %{ezproxy-protocol}i %{ezproxy-url1}<.*> %{v}<.*>"
+      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{ezproxy-groups}<.*?>\" \"%{referer}<.*?>\" \"%{user-agent}<.*?>\""
     }
   },
   "01-fr-sciences-po-paris-02": {
-    "fullName": "Sciences Po Paris (<2021/07/07)",
+    "fullName": "Sciences Po Paris (avant le 07/07/2021)",
     "country": "FR",
     "headers": {
       "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{referer}<.*?>\" \"%{user-agent}<.*?>\" %{ezproxy-session} %{ezproxy-groups}<[a-zA-Z+.-]+> %{affiliation} %{primary-affiliation} %{protocol} %{resource}<[^\\s]*> %{ezproxy-domain}<[a-zA-Z0-9.:-]+>"
+    }
+  },
+  "01-fr-sciences-po-paris-03": {
+    "fullName": "Sciences Po Paris (de 07/2021 à 08/2025)",
+    "country": "FR",
+    "headers": {
+      "Log-Format-ezproxy": "%h %l %{session-uid}<.*> %u %t \"%r\" %s %b \"%{referer}<.*>\" \"%{user-agent}<.*>\" %{ezproxy-session} %{ezproxy-groups}<.*> %{ezproxy-usrvar1}<.*> %{ezproxy-usrvar2}i %{ezproxy-protocol}i %{ezproxy-url1}<.*> %{v}<.*>"
     }
   },
   "01-fr-sciences-po-lyon": {
