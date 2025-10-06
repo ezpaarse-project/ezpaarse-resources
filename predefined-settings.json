@@ -317,7 +317,8 @@
     "headers": {
       "Accept": "text/csv",
       "Traces-Level": "info",
-      "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{user-agent}i<.*?>\""
+      "ezPAARSE-Middlewares": "(only) crossref, ezunpaywall",
+      "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{user-agent}i<.*?>\" \"%{doi}i<.*?>\"",
     }
   },
   "00-fr-clickandread": {
@@ -326,8 +327,8 @@
     "headers": {
       "Accept": "text/csv",
       "Traces-Level": "info",
-      "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{user-agent}i<.*?>\" \"%{os}i<.*?>\" \"%{institutions}i<.*?>\" \"%{sources}i<.*?>\" \"%{extension-version}i<.*?>\" \"%{source}i<.*?>\" \"%{doi}i<.*?>\" \"%{pii}i<.*?>\" \"%{pmid}i<.*?>\"",
-      "ezPAARSE-Middlewares": "ezunpaywall"
+      "ezPAARSE-Middlewares": "(only) crossref, ezunpaywall",
+      "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{user-agent}i<.*?>\" \"%{os}i<.*?>\" \"%{institutions}i<.*?>\" \"%{sources}i<.*?>\" \"%{extension-version}i<.*?>\" \"%{source}i<.*?>\" \"%{doi}i<.*?>\" \"%{pii}i<.*?>\" \"%{pmid}i<.*?>\""
     }
   },
   "00-ge-ezproxy-1": {
