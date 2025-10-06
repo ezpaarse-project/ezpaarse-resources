@@ -318,7 +318,7 @@
       "Accept": "text/csv",
       "Traces-Level": "info",
       "ezPAARSE-Middlewares": "(only) crossref, ezunpaywall",
-      "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{user-agent}i<.*?>\" \"%{doi}i<.*?>\"",
+      "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{user-agent}i<.*?>\" \"%{doi}i<.*?>\""
     }
   },
   "00-fr-clickandread": {
