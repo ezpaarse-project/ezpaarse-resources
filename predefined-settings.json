@@ -328,7 +328,7 @@
       "Accept": "text/csv",
       "Traces-Level": "info",
       "ezPAARSE-Middlewares": "(only) crossref, ezunpaywall",
-      "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{user-agent}i<.*?>\" \"%{os}i<.*?>\" \"%{institutions}i<.*?>\" \"%{sources}i<.*?>\" \"%{extension-version}i<.*?>\" \"%{source}i<.*?>\" \"%{doi}i<.*?>\" \"%{pii}i<.*?>\" \"%{pmid}i<.*?>\""
+      "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{referer}i<.*?>\" \"%{user-agent}i<.*?>\" \"%{os}i<.*?>\" \"%{institutions}i<.*?>\" \"%{sources}i<.*?>\" \"%{extension-version}i<.*?>\" \"%{source}i<.*?>\" \"%{doi}i<.*?>\" \"%{pii}i<.*?>\" \"%{pmid}i<.*?>\""
     }
   },
   "00-ge-ezproxy-1": {
