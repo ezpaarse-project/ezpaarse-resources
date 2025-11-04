@@ -720,6 +720,14 @@
       "Crypted-Fields": "none"
     }
   },
+  "00-fr-insp-01": {
+    "fullName": "INSP",
+    "country": "FR",
+    "headers": {
+      "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{F1}<[^\"]+>\" \"%{F2}<[^\"]+>\" \"%{F3}<[^\"]+>\" \"%{F4}<[^\"]+>\" \"%{F5}<[^\"]+>\" \"%{F6}<[^\"]+>\" \"%{F7}<[^\"]+>\" \"%{F8}<[^\"]+>\" \"%{F9}<[^\"]+>\" \"%{F10}<[^\"]+>\" \"%{F11}<[^\"]+>\" \"%{F12}<[^\"]+>\"",
+      "Crypted-Fields": "host,login"
+    }
+  },
   "10-us-psu": {
     "fullName": "Lamson Library - Plymouth State University",
     "country": "US",
