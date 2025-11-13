@@ -724,7 +724,7 @@
     "fullName": "INSP",
     "country": "FR",
     "headers": {
-      "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{F1}<[^\"]+>\" \"%{F2}<[^\"]+>\" \"%{F3}<[^\"]+>\" \"%{F4}<[^\"]+>\" \"%{F5}<[^\"]+>\" \"%{F6}<[^\"]+>\" \"%{F7}<[^\"]+>\" \"%{F8}<[^\"]+>\" \"%{F9}<[^\"]+>\" \"%{F10}<[^\"]+>\" \"%{F11}<[^\"]+>\" \"%{F12}<[^\"]+>\"",
+      "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{EnaDescription}<[^\"]+>\" \"%{EnaDepartment}<[^\"]+>\" \"%{EnaCompany}<[^\"]+>\" \"%{EnaJobTitle}<[^\"]+>\" \"%{EnaCity}<[^\"]+>\" \"%{memberOf0}<[^\"]+>\" \"%{memberOf1}<[^\"]+>\" \"%{memberOf2}<[^\"]+>\" \"%{memberOf3}<[^\"]+>\" \"%{memberOf4}<[^\"]+>\" \"%{memberOf5}<[^\"]+>\" \"%{memberOf6}<[^\"]+>\"",
       "Crypted-Fields": "host,login"
     }
   },
