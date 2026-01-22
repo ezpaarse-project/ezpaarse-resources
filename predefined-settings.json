@@ -7,6 +7,23 @@
       "Output-Fields": "+id,+pii,+sudoc-ppn,-platform,-identd,-size,-status"
     }
   },
+  "00-uk-UoG": {
+    "fullName": "University of Gloucestershire",
+    "country": "United Kingdom",
+    "headers": {
+      "Log-Format-ezproxy": "%h %l %u %{ezproxy-session}i %t \"%r\" %s %b %{ezproxy-groups}i %{referer}<[^ ]+> %{user-agent}<.*>",
+      "Crypted-Fields": "none"
+    }
+  },
+  "00-uk-UoG-anon": {
+    "fullName": "University of Gloucestershire (anonymised)",
+    "country": "United Kingdom",
+    "headers": {
+      "Log-Format-ezproxy": "%h %l %u %{ezproxy-session}i %t \"%r\" %s %b %{ezproxy-groups}i %{referer}<[^ ]+> %{user-agent}<.*>",
+      "Crypted-Fields": "none",
+      "Output-Fields": "-login,-geoip-latitude,-geoip-logitude,-host,-identd,-ezproxy-session"
+    }
+  },
   "00-fr-inist": {
     "fullName": "INIST-CNRS",
     "country": "FR",
