@@ -254,7 +254,7 @@
     "fullName": "Université du Maine > 24/04/2018",
     "country": "FR",
     "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b%{composante}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{libetape}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{affiliation}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\ ]+>%<[\\;]>%{codeetape}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\ ]+>%<[\\;]>%{enseignant}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{description}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{niveau}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{typepopulation}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>",
+      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b%{composante}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{libetape}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\: ]+>%<[\\;]>%{affiliation}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\ ]+>%<[\\;]>%{codeetape}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\ ]+>%<[\\;]>%{enseignant}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{description}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{niveau}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{typepopulation}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{codeaffectation}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\; ]>%{webaffectation}<[a-zA-Z0-9@\\. \\ -\\_%\\,=\\+\\'\\ ]+>%<[\\; ]>",
       "Crypted-Fields": "host,login",
       "Output-Fields": "+pii,+sudoc-ppn",
       "Sudoc-enrich": "true"
