@@ -28,10 +28,12 @@
     }
   },
   "00-fr-inist-webservices": {
-    "fullName": "INIST-CNRS - Webservices",
+    "fullName": "INIST-CNRS - Webservices (Istex TDM)",
     "country": "FR",
     "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{referer}<.*?>\" \"%{user-agent}<.*?>\" %{request-id}<\\d+> \"Router-%{container-name}<.*?>@file\" \"%{server-name}<.*?>\" %{elapsed}"
+      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{referer}<.*?>\" \"%{user-agent}<.*?>\" %{request-id}<\\d+> \"Router-%{container-name}<.*?>@file\" \"%{server-name}<.*?>\" %{elapsed}",
+      "Double-Click-Removal": "false",
+      "Output-Fields": "+sid"
     }
   },
   "00-fr-bibinserm": {
