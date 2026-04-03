@@ -34,6 +34,7 @@
       "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{referer}<.*?>\" \"%{user-agent}<.*?>\" %{request-id}<\\d+> \"Router-%{container-name}<.*?>@file\" \"%{server-name}<.*?>\" %{elapsed}",
       "Force-Parser": "istextdm",
       "Double-Click-Removal": "false",
+      "ezPAARSE-Filter-Redirects": "false",
       "Output-Fields": "+sid"
     }
   },
