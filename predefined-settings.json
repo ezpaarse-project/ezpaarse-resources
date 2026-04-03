@@ -32,6 +32,7 @@
     "country": "FR",
     "headers": {
       "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{referer}<.*?>\" \"%{user-agent}<.*?>\" %{request-id}<\\d+> \"Router-%{container-name}<.*?>@file\" \"%{server-name}<.*?>\" %{elapsed}",
+      "Force-Parser": "istextdm",
       "Double-Click-Removal": "false",
       "Output-Fields": "+sid"
     }
