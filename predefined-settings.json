@@ -1,1162 +1,1163 @@
 {
-  "00-00-ezMESURE": {
-    "fullName": "ezPAARSE output to ezMESURE input",
-    "country": "Generic - preconfiguration",
-    "headers": {
-      "Crypted-Fields": "none",
-      "Output-Fields": "+id,+pii,+sudoc-ppn,-platform,-identd,-size,-status"
+    "00-00-ezMESURE": {
+        "fullName": "ezPAARSE output to ezMESURE input",
+        "country": "Generic - preconfiguration",
+        "headers": {
+            "Crypted-Fields": "none",
+            "Output-Fields": "+id,+pii,+sudoc-ppn,-platform,-identd,-size,-status"
+        }
+    },
+    "00-fr-inist": {
+        "fullName": "INIST-CNRS",
+        "country": "FR",
+        "headers": {
+            "Crypted-Fields": "none"
+        }
+    },
+    "00-fr-bibcnrs": {
+        "fullName": "INIST-BIBCNRS",
+        "country": "FR",
+        "headers": {
+            "Accept": "text/csv",
+            "Traces-Level": "info",
+            "Log-Format-ezproxy": "%h %{ezproxy-session} %l %u %t \"%r\" %s %b %{bib-groups}<[a-zA-Z0-9@\\.\\-_%\\,=\\+]+>",
+            "Crypted-Fields": "login,user",
+            "Output-Fields": "+bib-groups",
+            "ezPAARSE-Middlewares": "(after crossref) ezunpaywall,ebscohost,populate",
+            "extract": "login => /^([^_]+)_O_([^_]+)_I_([^_]+)_OU_([^_]+)$/ => user,section,department,unit"
+        }
+    },
+    "00-fr-inist-webservices": {
+        "fullName": "INIST-CNRS - Webservices (Istex TDM)",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{referer}<.*?>\" \"%{user-agent}<.*?>\" %{request-id}<\\d+> \"Router-%{container-name}<.*?>@file\" \"%{server-name}<.*?>\" %{elapsed}<[0-9]+>ms",
+            "Force-Parser": "istextdm",
+            "Double-Click-Removal": "false",
+            "ezPAARSE-Filter-Redirects": "false",
+            "Output-Fields": "+sid"
+        }
+    },
+    "00-fr-bibinserm": {
+        "fullName": "INSERM",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %{ezproxy-session} %l %{login}<[a-zA-Z0-9@._%,='+-]+> %t \"%r\" %s %b %{bib-groups}<[a-zA-Z0-9@\\.\\-_%\\,=\\+]+>",
+            "Crypted-Fields": "none",
+            "Output-Fields": "+bib-groups",
+            "extract": "login => /^([^_]+)_O_([^_]+)_I_([^_]+)_OU_([^_]+)_I_([^_]+)_DR_([^_]+)_SITE_([^_]+)$/ => unit1,section,department,unit2,it,loc,site",
+            "ezPAARSE-Middlewares": "ebscohost,populate"
+        }
+    },
+    "00-fr-inist-irevues-dspace": {
+        "fullName": "INIST-CNRS - Irevues - Dspace",
+        "country": "FR",
+        "headers": {
+            "Crypted-Fields": "none",
+            "Log-Format-apache": "%h %l %u %t %r %>s %b",
+            "Force-Parser": "dspace",
+            "Force-ECField-Publisher": "Irevues",
+            "Disable-Filters": "robots",
+            "Output-Fields": "+pid,+robot,-domain,-online_identifier,-print_identifier,-platform_name,-identd"
+        }
+    },
+    "00-fr-inist-irevues-lodel": {
+        "fullName": "INIST-CNRS - Irevues - Lodel",
+        "country": "FR",
+        "headers": {
+            "Crypted-Fields": "none",
+            "Force-Parser": "lodel",
+            "Force-ECField-Publisher": "Irevues",
+            "Disable-Filters": "robots",
+            "Output-Fields": "+pid,+robot,-domain,-online_identifier,-print_identifier,-platform_name,-identd",
+            "Log-Format-Apache": "%{host}<[a-zA-Z0-9.\\-:]+(?:, ?[a-zA-Z0-9.\\-:]+)*> %l %u %t \"%r\" %>s %b \"%{referer}<[^ \"]+>\" \"%{user-agent}<[^\"]+>\""
+        }
+    },
+    "01-fr-ezunpaywall-01": {
+        "fullName": "ezUnpaywall",
+        "country": "FR",
+        "headers": {
+            "Crypted-Fields": "none",
+            "Accept": "text/csv",
+            "Force-Parser": "ezupw",
+            "Force-ECField-Publisher": "ezUnpaywall",
+            "Traces-Level": "info",
+            "Log-Format-apache": "%h \"%{login}<[a-zA-Z0-9@\\.\\-_%,=\\&\\ ]+>\" %t \"%r\" %>s %b \"%{referer}<[^\"]*>\" \"%{response_time}<[0-9.]+>%<[^\"]*>\" \"%{user-agent}<[^\"]*>\" %{doi_count}<[^ ]*>",
+            "Double-Click-Removal": "false",
+            "ezPAARSE-Middlewares": "populate,user-agent-parser",
+            "Output-Fields": "+sid,-print_identifier,-online_identifier,-publication_title,-unitid,-domain,-on_campus"
+        }
+    },
+    "00-fr-inist-irevues-lodel-old": {
+        "fullName": "INIST-CNRS - Irevues - Lodel (jusqu'au 13/11/2018)",
+        "country": "FR",
+        "headers": {
+            "Crypted-Fields": "none",
+            "Force-Parser": "lodel",
+            "Force-ECField-Publisher": "Irevues",
+            "Disable-Filters": "robots",
+            "Output-Fields": "+pid,+robot,-domain,-online_identifier,-print_identifier,-platform_name,-identd"
+        }
+    },
+    "00-fr-panist": {
+        "fullName": "PANIST",
+        "country": "FR",
+        "headers": {
+            "EZPAARSE-Filter-Status": "false",
+            "Force-Parser": "panist",
+            "panist-enrich": "true",
+            "panist-ttl": "3600",
+            "Crypted-Fields": "none",
+            "crossref-enrich": "false",
+            "ezPAARSE-Middlewares": "panist, user-agent-parser",
+            "Log-Format-apache": "%h %<\"?>%{istex-id}<[^ ]+?>%<\"?> %<\"?>%{owner}<[^\"]+>%<\"?> %<\"?>%{idp}<[^\"]+>%<\"?> %u %t \"%{method}<[A-Z]+> %U %<[^ ]+>\" %{status}<[0-9\\-]+> %b \"%{referer}<[^\"]+>\" \"%{user-agent}<[^\"]+>\" %{sid}<[^ ]+> %<\"?>%{auth}<[^ \"]+>%<\"?>",
+            "Output-Fields": "+login,+istex_rtype,+istex_genre,+ark,-platform,+publisher_name,+language,+publication_date,+subject,-identd,-domain,+doi-publication-date-year,+istex_bundle_size"
+        }
+    },
+    "00-fr-istex": {
+        "fullName": "ISTEX",
+        "country": "FR",
+        "headers": {
+            "EZPAARSE-Filter-Status": "false",
+            "Force-Parser": "istex",
+            "istex-enrich": "true",
+            "istex-ttl": "3600",
+            "Crypted-Fields": "host",
+            "crossref-enrich": "false",
+            "ezPAARSE-Middlewares": "(before istex) user-agent-parser | (after istex) cut,ip-to-abesid,idp-to-abesid,abesid-to-etab",
+            "Log-Format-apache": "%h %<\"?>%{istex-id}<[^ ]+?>%<\"?> %<\"?>%{owner}<[^\"]+>%<\"?> %<\"?>%{idp}<[^\"]+>%<\"?> %u %t \"%{method}<[A-Z]+> %U %<[^ ]+>\" %{status}<[0-9\\-]+> %b \"%{referer}<[^\"]+>\" \"%{user-agent}<[^\"]+>\" %{sid}<[^ ]+> %<\"?>%{auth}<[^ \"]+>%<\"?>",
+            "Output-Fields": "+login,+istex_rtype,+istex_genre,+ark,+publisher_name,+language,+publication_date,+subject,+doi-publication-date-year,+istex_bundle_size,+access_type,+oa_status,+abes-id,+institutionName,-platform,-identd,-domain",
+            "ip-to-abesid-source-field": "host",
+            "ip-to-abesid-enriched-field": "abes-id",
+            "abesid-to-etab-source-field": "abes-id",
+            "abesid-to-etab-enriched-fields": "{ \"Nom Etablissement\": \"institutionName\" }",
+            "idp-to-abesid-enriched-field": "abes-id",
+            "idp-to-abesid-source-field": "istex-id",
+            "extract": "istex-id=>/^(ABES.*)/=>abes-id"
+        }
+    },
+    "00-fr-istex-1": {
+        "fullName": "ISTEX(de 19/10/2016 à 22/09/2017)",
+        "country": "FR",
+        "headers": {
+            "EZPAARSE-Filter-Status": "false",
+            "Force-Parser": "istex",
+            "istex-enrich": "true",
+            "istex-ttl": "3600",
+            "Crypted-Fields": "none",
+            "crossref-enrich": "false",
+            "ezPAARSE-Middlewares": "(before istex) user-agent-parser",
+            "Log-Format-apache": "%h %<\"?>%{istex-id}<[^ ]+?>%<\"?> %<\"?>%{owner}<[^\"]+>%<\"?> %u %t \"%r\" %{status}<[0-9]+> %b \"%{referer}<[^\"]+>\" \"%{user-agent}<[^\"]+>\" %{sid}<[^ ]+>",
+            "Output-Fields": "+login,+istex_rtype,+istex_genre,+ark,-platform,+publisher_name,+language,+publication_date,+subject,-identd,-domain,+doi-publication-date-year,+istex_bundle_size"
+        }
+    },
+    "00-fr-istex-2": {
+        "fullName": "ISTEX-LIGHT (avant 18/10/2016)",
+        "country": "FR",
+        "headers": {
+            "EZPAARSE-Filter-Status": "false",
+            "Force-Parser": "istex",
+            "istex-enrich": "true",
+            "istex-ttl": "3600",
+            "Crypted-Fields": "none",
+            "crossref-enrich": "false",
+            "Output-Fields": "+login,+istex_rtype,+istex_genre,+ark,-platform,+publisher_name,+language,+publication_date,+subject,-identd,-domain,+doi-publication-date-year,+istex_bundle_size"
+        }
+    },
+    "00-fr-univ-lorr": {
+        "fullName": "Université de Lorraine",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %{session}<[a-zA-Z0-9\\-\\+]+> %u %t \"%r\" %s %b %{user}<[a-zA-Z0-9\\-\\+,]+>",
+            "Crypted-Fields": "none"
+        }
+    },
+    "00-fr-univ-lorr-docnum": {
+        "fullName": "Université de Lorraine - PETALE",
+        "country": "FR",
+        "headers": {
+            "Crypted-Fields": "none",
+            "Force-Parser": "docnum",
+            "Output-Fields": "+year,+institution,-login,-platform,-platform_name,-publisher_name,-rtype,-mime,-online_identifier,-print_identifier,-doi,-publication_title,-identd,-domain"
+        }
+    },
+    "00-fr-univ-brest": {
+        "fullName": "Université de Bretagne Occidentale",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{ufr}<.*> %{niveau}<.*>",
+            "Crypted-Fields": "host,login"
+        }
+    },
+    "00-fr-UPJV": {
+        "fullName": "Université Picardie Jules Verne",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %{ezproxy-session} %t \"%r\" %s %b %{categ}<[^ ]+> %{niveau}<[^ ]+> \"%{affect}<[^\"]+>\"",
+            "Crypted-Fields": "none"
+        }
+    },
+    "00-fr-univ-polynesie": {
+        "fullName": "Université de Polynésie Française",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %{ezproxy-groups}i %t \"%r\" %s %b",
+            "Crypted-Fields": "host,login"
+        }
+    },
+    "00-fr-univ-savoie": {
+        "fullName": "Université Savoie Mont Blanc",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%{datesyslog}<[\\w\\ ]+> %{heure_syslog}<[\\d:]+\\w> %{serveur_grenet}<[\\w-]+> %{ezproxy_instance}<[\\w-]+>%<: >%{site}<[a-z-0-9.]+>%<:[0-9]+> %h %{ezproxy-groups}<[\\w+\\-.]+> %{ezproxy-session}<[\\w-_]+> %u %t \"%r\" %s %b",
+            "Crypted-Fields": "host,login"
+        }
+    },
+    "00-fr-univ-savoie-heberge": {
+        "fullName": "Université Savoie Mont Blanc Hebergé",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %{ezproxy-session}<[\\w+\\-.]+> %t \"%r\" %s %b \"%{ezproxy-groups}<[\\w+\\-.]+>\" \"%{referer}<[^ ]+>\" \"%{user-agent}<.*>\"",
+            "Crypted-Fields": "host,login"
+        }
+    },
+    "00-fr-univ-grenoble": {
+        "fullName": "Université de Grenoble",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%{datesyslog}<[\\w\\ ]+> %{heure_syslog}<[\\d:]+\\w> %{serveur_grenet}<\\w+> %{ezproxy_instance}<[\\w-]+>%<: >%{site}<[a-z-0-9.]+>%<:[0-9]+> %h %{ezproxy-groups}<[\\w+\\-.]+> %{ezproxy-session}<[\\w-_]+> %u %t \"%r\" %s %b",
+            "Crypted-Fields": "none"
+        }
+    },
+    "00-fr-univ-grenoble-02": {
+        "fullName": "Université de Grenoble-Alpes",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%{datesyslog}<[\\w\\ ]+> %{heure_syslog}<[\\d:]+\\w> %{serveur_grenet}<[\\w-]+> %{ezproxy_instance}<[\\w-]+>%<: >%{site}<[a-z-0-9.]+>%<:[0-9]+> %h %{ezproxy-groups}<[\\w+\\-.]+> %{ezproxy-session}<[\\w-_]+> %u %t \"%r\" %s %b %{etablissement}<[\\w\\-_]+> %{statut}<[\\w\\-_]+> %{formation}<[\\w\\-_.]+> %{structure}<[\\w\\-_.]+> %{niveau}<[\\w\\-_.]+> %{discipline}<[\\w\\-_.]+>>",
+            "Crypted-Fields": "host,login"
+        }
+    },
+    "00-fr-univ-grenoble-01": {
+        "fullName": "Université de Grenoble - log enrichis",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%{datesyslog}<[\\w\\ ]+> %{heure_syslog}<[\\d:]+\\w> %{serveur_grenet}<\\w+> %{ezproxy_instance}<[\\w-]+>%<: >%{site}<[a-z-0-9.]+>%<:[0-9]+> %h %{ezproxy-groups}<[\\w+\\-.]+> %{ezproxy-session}<[\\w-_]+> %u %t \"%r\" %s %b %<etab:>%{etab}<[\\w-_]+> %<group_structure:>%{group_structure}<[\\w_,]*> %<group_SHS:>%{group_shs}<[A-Za-z_,-]+> %<group_gael:>%{group_gael}<[\\w_,]+> %<status:>%{status_user}<[A-Z,\\s-]+>%<auto_ip:>%{auto_ip}<[\\w]+>",
+            "Crypted-Fields": "host,login"
+        }
+    },
+    "00-fr-univ-bordeaux-01": {
+        "fullName": "Université de Bordeaux Montaigne",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{ezproxy-session}<[^ ]+>%<[\\s]*>%{UFR}<[A-Z]*>%<[\\s]*>%{statusPerson}<[A-Za-z+]*>",
+            "Crypted-Fields": "host,login"
+        }
+    },
+    "00-fr-univ-bordeaux-02": {
+        "fullName": "Université de Bordeaux Montaigne > 19/03/2019",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{ezproxy-session}%<[\\s]*>%{statusPerson}<[A-Za-z+-]*>%<[\\s]*>%{UFR}<[A-Za-z_+-]*>%<[\\s]*>%{department}<[A-Za-z0-9+-]*>",
+            "Crypted-Fields": "host,login"
+        }
+    },
+    "00-fr-univ-lemans-00": {
+        "fullName": "Université du Maine > 24/04/2018",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b%{composante}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{libetape}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\: ]+>%<[\\;]>%{affiliation}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\ ]+>%<[\\;]>%{codeetape}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\ ]+>%<[\\;]>%{enseignant}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{description}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{niveau}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{typepopulation}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{codeaffectation}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\; ]>%{webaffectation}<[a-zA-Z0-9@\\. \\ -\\_%\\,=\\+\\'\\ ]+>%<[\\; ]>",
+            "Crypted-Fields": "host,login",
+            "Output-Fields": "+pii,+sudoc-ppn",
+            "Sudoc-enrich": "true"
+        }
+    },
+    "00-fr-univ-lemans-01": {
+        "fullName": "Université du Maine > 24/03/2017 < 24/04/2018",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{composante}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{libetape}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{affiliation}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\ ]+>%<[\\;]>%{codeetape}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\ ]+>%<[\\;]>%{enseignant}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{description}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>",
+            "Crypted-Fields": "none"
+        }
+    },
+    "00-fr-univ-fc": {
+        "fullName": "Université de Franche Comté",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%{login}<[^\\s]*[@0-9A-Z]*> %t \"%r\" %s %b",
+            "Crypted-Fields": "none",
+            "extract": "login => split(@) => c1,c2,c3,c4,c5,c6,c7"
+        }
+    },
+    "00-fr-hal": {
+        "fullName": "HAL - Archives Ouvertes",
+        "country": "FR",
+        "headers": {
+            "Log-Format-apache": "%{Syslog_Date}<[a-zA-Z]{3} +\\d{1,2} +\\d{2}:\\d{2}:\\d{2}> %{Machine_Name} %{httpd}: %{domain}<[\\w.-]+> %h - - %t \"%r\" %>s %b \"%{Referer}<.+?>\" \"%{user-agent}<.*>\"",
+            "Crypted-Fields": "none",
+            "Force-Parser": "hal",
+            "Hal-enrich": "true",
+            "ezPAARSE-Middlewares": "bot-ua-detector,trackcode-generator,robots",
+            "ezPAARSE-Filter-Redirects": "false",
+            "Output-Fields": "-login,-platform,-platform_name,-publisher_name,-online_identifier,-print_identifier,-unitid,-identd,-subject,-publication_date,+hal_fulltext,+hal_identifiant,+hal_consult_collection,+hal_consult_collection_sid,+hal_docid,+hal_endpoint_portail,+hal_endpoint_portail_sid,+hal_redirect_portail,+hal_redirect_start_portail,+hal_tampons,+hal_tampons_name,+hal_domains,+trackcode,+hal_redirection,-date,-Syslog_Date,-httpd,-type,-title_id,-doi"
+        }
+    },
+    "00-fr-hal2016": {
+        "fullName": "HAL - Avant 2016",
+        "country": "FR",
+        "headers": {
+            "Log-Format-apache": "%h - - %t \"%r\" %>s %b \"%{Referer}<.+?>\" \"%{user-agent}<.*>\"",
+            "Crypted-Fields": "none",
+            "Force-Parser": "hal",
+            "Hal-enrich": "true",
+            "ezPAARSE-Middlewares": "bot-ua-detector,trackcode-generator,robots",
+            "ezPAARSE-Filter-Redirects": "false",
+            "Output-Fields": "-login,-platform,-platform_name,-publisher_name,-online_identifier,-print_identifier,-unitid,-identd,-subject,-publication_date,+hal_fulltext,+hal_identifiant,+hal_consult_collection,+hal_consult_collection_sid,+hal_docid,+hal_endpoint_portail,+hal_endpoint_portail_sid,+hal_redirect_portail,+hal_redirect_start_portail,+hal_tampons,+hal_tampons_name,+hal_domains,+trackcode,+hal_redirection,-date,-Syslog_Date,-httpd,-type,-title_id,-doi"
+        }
+    },
+    "00-eu-openaire": {
+        "fullName": "OpenAIRE - Archives Ouvertes",
+        "country": "Europe",
+        "headers": {
+            "Force-Parser": "openaire",
+            "Log-Format-apache": "%{piwik-ip}<.*> %h - - %t \"%{piwik}<.*>\" %>s - \"%U\" %{user-agent}<.*>"
+        }
+    },
+    "00-fr-bibcnrs-bibapi": {
+        "fullName": "00-fr-bibcnrs-bibapi",
+        "country": "FR",
+        "headers": {
+            "Accept": "text/csv",
+            "Traces-Level": "info",
+            "ezPAARSE-Middlewares": "(only) crossref, ezunpaywall",
+            "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{user-agent}i<.*?>\" \"%{i}i<.*?>\" \"%{o}i<.*?>\" \"%{ou}i<.*?>\" \"%{portal}i<.*?>\" \"%{sid}i<.*?>\" \"%{doi}i<.*?>\""
+        }
+    },
+    "00-fr-clickandread": {
+        "fullName": "00-fr-clickandread",
+        "country": "FR",
+        "headers": {
+            "Accept": "text/csv",
+            "Traces-Level": "info",
+            "ezPAARSE-Middlewares": "(only) crossref, ezunpaywall",
+            "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{referer}i<.*?>\" \"%{user-agent}i<.*?>\" \"%{os}i<.*?>\" \"%{institutions}i<.*?>\" \"%{sources}i<.*?>\" \"%{sourcesOption}i<.*?>\" \"%{source}i<.*?>\" \"%{manifestVersion}i<.*?>\" \"%{grantee}i<.*?>\" \"%{doi}i<.*?>\" \"%{pii}i<.*?>\" \"%{pmid}i<.*?>\" \"%{idType}i<.*?>\""
+        }
+    },
+    "00-ge-ezproxy-1": {
+        "fullName": "EZproxy (with user-agent) : %h %l %u %t \"%r\" %s %b \"%{user-agent}<.*>\"",
+        "country": "Generic",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{user-agent}<.*>\""
+        }
+    },
+    "00-ge-ezproxy-2": {
+        "fullName": "EZproxy (with referer) : %t %h %{session} %U \"%{referer}<[^ ]+>\" %s",
+        "country": "Generic",
+        "headers": {
+            "Log-Format-ezproxy": "%t %h %{session} %U \"%{referer}<[^ ]+>\" %s"
+        }
+    },
+    "01-fr-full-enrichment": {
+        "fullName": "Enrichissement automatique",
+        "country": "FR",
+        "headers": {
+            "Crypted-Fields": "none",
+            "Output-Fields": "+pii,+sudoc-ppn",
+            "crossref-enrich": "true",
+            "sudoc-enrich": "true"
+        }
+    },
+    "01-fr-univ-pda": {
+        "fullName": "Université Paris Descartes Apache",
+        "country": "FR",
+        "headers": {
+            "Crypted-Fields": "none",
+            "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b %<.*>"
+        }
+    },
+    "01-fr-open-edition-01": {
+        "fullName": "Open Edition",
+        "country": "FR",
+        "headers": {
+            "Crypted-Fields": "session_id,user_id",
+            "Output-Fields": "-login,-on-campus,-identd,-middlewares,-size",
+            "Reject-Files": "all",
+            "Clean-Only": "0",
+            "ezPAARSE-Middlewares": "session-id",
+            "oe-ttl": "0",
+            "oei-ttl": "0"
+        }
+    },
+    "01-fr-univ-pdb": {
+        "fullName": "Université Paris Descartes Bibliopam",
+        "country": "FR",
+        "headers": {
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-rennes-1": {
+        "fullName": "Université de Rennes 1",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %u %{ezproxy-groups}i %t \"%r\" %s %b %<.*>",
+            "Output-Fields": "+ezproxy-groups",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-rennes-1-ezmesure": {
+        "fullName": "Université de Rennes 1 - ezMESURE",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %u %{ezproxy-groups}i %t \"%r\" %s %b %<.*>",
+            "Output-Fields": "+ezproxy-groups,+id,+pii,+sudocppn,+ezproxy-groups,-platform,-identd,-size,-status",
+            "Crypted-Fields": "host,login"
+        }
+    },
+    "01-fr-univ-evry-val-essonne": {
+        "fullName": "Université Evry Val d'Essonne",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" \"%{platform-name}<[a-zA-Z0-9 \\-]+>\" %s %b \"%{categorie}<.*>\" \"%{affiliation}<.*>\" \"%{etablissement}<.*>\" %{ipsortie}<.*>",
+            "Date-Format": "YYYY-MM-DD hh:mm:ss",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-rennes-2": {
+        "fullName": "Université de Rennes 2",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%<.*>\"",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-lyon-1": {
+        "fullName": "Université Lyon 1",
+        "country": "FR",
+        "headers": {
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-lyon-2": {
+        "fullName": "Université Lumière Lyon 2",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %u %{ezproxy-session}i %t \"%r\" %s %b %{request-duration}<[0-9]+>",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-lyon-3": {
+        "fullName": "Université Lyon 3",
+        "country": "FR",
+        "headers": {
+            "Accept": "text/csv",
+            "Traces-Level": "info",
+            "Log-Format-ezproxy": "%t %h %l %u %l \"%r\" %s %b \"%{user-agent}<.*>\"",
+            "Crypted-Fields": "host,login"
+        }
+    },
+    "01-fr-univ-lyon-3-02": {
+        "fullName": "Université Lyon 3 ( < 06/07/2021)",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%t %h - %u %l \"%r\" %s %b",
+            "Crypted-Fields": "none"
+        }
+    },
+    "00-fr-insa-lyon-01": {
+        "fullName": "INSA Lyon",
+        "country": "FR",
+        "headers": {
+            "Accept": "text/csv",
+            "Traces-Level": "info",
+            "Log-Format-ezproxy": "%<.* Ezproxy: >%h %l %u %t \"%r\" %s %b %{ezproxygroups}<[a-zA-Z0-9\\-\\+]+>",
+            "Crypted-Fields": "host,login"
+        }
+    },
+    "01-fr-univ-strasbourg": {
+        "fullName": "Université de Strasbourg",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%t %h %s %u %U %b %{session}<[a-zA-Z0-9]+|\\->",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-essec": {
+        "fullName": "ESSEC Business School",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "SRC_IP=%h|EZP_ID=%{session}|USER=%u|START_TIME=%t|HTTP_REQUEST=%U|WEBSITE=%{website}<[a-z0-9\\.\\:]+>|HTTP_CODE=%s|NB_BYTES=%b|GROUPS=%{groups}<[_A-Z0-9\\+\\-]+>",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-toulouse-3": {
+        "fullName": "Université de Toulouse 3 BiblioPAM",
+        "country": "FR",
+        "headers": {
+            "Log-Format-apache": "%{epoch},%h,%b,%<[\"]?>%{ress-name}<[^\"]+?>%<[\"]?>,%U,%>s,%<[\"]?>%{mt}<[a-zA-Z0-9-/ \"=_+;.]+>%<[\"]?>,%{profil1}<[a-zA-Z0-9-/ \"=+;_]+>,%{uid},%{session-id},%<\"?>%{profil2}<[^\"]*?>%<\"?>",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-toulouse-1": {
+        "fullName": "Université de Toulouse 1 Capitole - BiblioPAM",
+        "country": "FR",
+        "headers": {
+            "Log-Format-apache": "%{epoch},%h,%b,%<[\"]?>%{ress-name}<[^\"]+?>%<[\"]?>,%U,%>s,%<[\"]?>%{mt}<[a-zA-Z0-9-/ \"=_+;.]+>%<[\"]?>,%{profil1}<[a-zA-Z0-9-/ \"=+;_]+>,%{uid},%{session-id},%<\"?>%{profil2}<[^\"]*?>%<\"?>",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-orleans-bibliopam": {
+        "fullName": "Université d'Orléans - BiblioPAM",
+        "country": "FR",
+        "headers": {
+            "Log-Format-apache": "%{timestamp}<[0-9]+>,%h,%b,%<\"?>%{ress-name}<[a-zA-Z0-9+&- :,.'éèàç]+>%<\"?>,%U,%>s,%<\"?>%{mt}<[a-zA-Z0-9+-/;= .]+>%<\"?>,%<\"?>%{profil}<[a-zA-Z0-9/ -_éèàç]*>,%{uid}<[a-zA-Z0-9]*>,%{session-id}<[a-zA-Z0-9]*>,",
+            "Crypted-Fields": "host,login"
+        }
+    },
+    "01-fr-univ-orleans-ezproxy": {
+        "fullName": "Université d'Orléans - EZproxy",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{ezproxy-groups}<[a-zA-Z0-9@.-_%,=+]+>",
+            "Crypted-Fields": "host,login"
+        }
+    },
+    "01-fr-univ-limoges": {
+        "fullName": "Université de Limoges",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %{session}<[a-zA-Z0-9\\-\\+]+> %u %t \"%r\" %s %b %{user}<[a-zA-Z0-9\\-\\+,]+>",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-limoges-02": {
+        "fullName": "Université de Limoges - 2025",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%u;%{ezproxy-session}i;%h;%t;%s;%b;\"%U\";%{statut}<.*?>;%{affectation}<.*?>;%{RNE_composante}<[\\d{7}A-Z]*>;%{label_composante}<.*?>;%{RNE_composante_sec}<[\\d{7}A-Z, ]*>;%{affectation_sec}<.*?>;%{label_composante_sec}<.*?>;%{employeur}<.*?>;%{annee}<[\\d{4}]*>;%{code_etape}<[\\w-]*>;%{label_etape}<.*?>;%{niveau}<.*?>",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-montpellier": {
+        "fullName": "BIU de Montpellier",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %{session}<[a-zA-Z0-9\\-\\+]+> %{type_user}<(?:[a-zA-Z0-9]+\\.)?>%{login}<[a-zA-Z0-9]+> %t \"%r\" %s %b %<[a-zA-Z0-9\\-\\+]+>",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-montpellier-a": {
+        "fullName": "BIU de Montpellier 2018->",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h - %{login}<[a-zA-Z0-9\\-]+> %t \"%r\" %s %b %{ezproxy-groups}<[a-zA-Z0-9\\-]+> %{shib-supannEtablissement}<[\\{\\}a-zA-Z0-9]*> %{shib-eduPersonAffiliation}<[a-zA-Z0-9\\-]*> %<.*>",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-paris-1": {
+        "fullName": "Université Paris 1",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %{session} %u %t \"%r\" %s %b",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-paris-8": {
+        "fullName": "Université Paris 8",
+        "country": "FR",
+        "headers": {
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-paris-8-avt-06-2016": {
+        "fullName": "Université Paris 8 < juin 2016",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h - %u %{group} %{session}<[a-zA-Z0-9\\-\\+]+> %t \"%r\" %s %b %{domain}<[^ ]+>",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-paris-sud-ezproxy": {
+        "fullName": "Université Paris Sud",
+        "country": "FR",
+        "headers": {
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-paris-sud-squid": {
+        "fullName": "Université Paris Sud - Squid",
+        "country": "FR",
+        "headers": {
+            "Log-Format-squid": "%tl %{response_time}<[0-9a-z-A-Z]+> %>a %Ss/%>Hs %<st %rm %ru - %Sh/%<a %mt",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-pec": {
+        "fullName": "Université Paris-Est Créteil (UPEC)",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b - -  %{revue}<[a-zA-Z0-9\\-\\+,]+> %{discipline}<[a-zA-Z0-9\\-\\+,]+> %<.*>",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-pmc": {
+        "fullName": "UPMC - Université Pierre et Marie Curie - Paris 6",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u - %t \"%r\" %s %b %{website}<.*>",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-sorbonne": {
+        "fullName": "Université Paris Sorbonne",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h|%u|%{ezproxy-session}i|%{session-eduPersonAffiliation}<.*?>|%{ezproxy-groups}<[a-zA-Z0-9_+-]+>|%t|\"%r\"|%s|%b|%{domain-port}<[a-zA-Z0-9.-]+:[0-9]+>|%{referer}<.*?>|%{execution-time}<[0-9]+>",
+            "Crypted-Fields": "host,login"
+        }
+    },
+    "01-fr-univ-dauphine": {
+        "fullName": "Université Paris Dauphine",
+        "country": "FR",
+        "headers": {
+            "Log-Format-apache": "%{epoch},%h,%b,%<[\"]?>%{ress-name}<[a-zA-Z0-9 \":,-]+>%<[\"]?>,%U,%>s,%<[\"]?>%{mt}<[a-zA-Z0-9-/ \"=+;]+>%<[\"]?>,%{profil1}<[a-zA-Z0-9-/ \"=+;_]+>,%{uid},%{session-id}",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-vsq": {
+        "fullName": "UVSQ - Université de Versailles St-Quentin-en-Yvelines Bibliopam",
+        "country": "FR",
+        "headers": {
+            "Log-Format-apache": "%{epoch},%h,%b,%{ress-name}<\"?[a-zA-Z0-9-/ �']+\"?>,%U,%>s,%{mt}<[a-zA-Z0-9-/ ;=\".+]+>,%{profil}<.+>,%{uid},%{session-id},",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-vsq-reject-all": {
+        "fullName": "UVSQ - Bibliopam - Reject-all",
+        "country": "FR",
+        "headers": {
+            "Log-Format-apache": "%{epoch},%h,%b,%{ress-name}<\"?[a-zA-Z0-9-/ �']+\"?>,%U,%>s,%{mt}<[a-zA-Z0-9-/ ;=\".+]+>,%{profil}<.+>,%{uid},%{session-id},",
+            "Crypted-Fields": "none",
+            "Reject-Files": "all"
+        }
+    },
+    "01-fr-univ-vhc": {
+        "fullName": "Université de Valenciennes et du Hainaut-Cambrésis",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%{datetime}<[^|]+>|%{session}<[^ ]+>|%h|%U|%{profil}<[a-zA-Z0-9+]+>|%{domain}<[^ ]+>|",
+            "Date-Format": "YYYY/MM/DD:HH:mm:ss",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-lco": {
+        "fullName": "ULCO Université Littoral Cote d'Opale",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h \"%{config}<[^\"]*>\" %u %t %b %U",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-ensam": {
+        "fullName": "ENSAM Arts et Métiers ParisTech",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %u %l %t \"%r\" %s %b %{country_code}<[A-Z]+> %{city}<.*>",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-lille-2": {
+        "fullName": "Université Lille 2",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %{ezproxy-groups}<[a-zA-Z0-9+_]+> %l %u %t \"%r\" %s %b",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-bourgogne": {
+        "fullName": "Université de Bourgogne",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %u %{ezproxy-groups}i %t \"%r\" %s %b %{ufr}<[a-zA-Z0-9\\-]+> %{etape}<[a-zA-Z0-9\\-]+> %{diplome}<[a-zA-Z0-9\\-]+> %{affiliation}<[a-zA-Z0-9]+> %{cursus}<[a-zA-Z0-9\\-\\{\\}]+> %{secteur}<[a-zA-Z0-9\\-\\{\\}]+>",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-jm": {
+        "fullName": "Saint-Étienne - Université Jean Monnet (UJM)",
+        "country": "FR",
+        "headers": {
+            "Log-Format-squid": "%ts.%03tu %6tr %>a %Ss/%03>Hs %<st %rm %ru %[un %Sh/%{last-ip}<.*?> %mt",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-ec-lyon": {
+        "fullName": "EC Lyon Hébergé",
+        "country": "FR",
+        "headers": {
+            "Crypted-Fields": "none",
+            "Request-Charset": "iso-8859-1",
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{xtype}<[^\"]*>\" \"%{referer}<[^\"]*>\" \"%{user-agent}<.*>\" \"%{profil}<.*>\""
+        }
+    },
+    "10-ch-epfl": {
+        "fullName": "École polytechnique fédérale de Lausanne",
+        "country": "CH",
+        "headers": {}
+    },
+    "00-fr-ens-lyon": {
+        "fullName": "Bibliothèque Diderot / ENS Lyon",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %u %{groups}<[a-zA-Z\\+\\.\\-]+> %{ezproxy-session} %t \"%r\" %s %b",
+            "Output-Fields": "-platform,-ezproxy-session,-status,-size",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-mir-ezproxy": {
+        "fullName": "Bibliothèques MIR ezproxy",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %{session}<[a-zA-Z0-9\\-]+> %u %t \"%r\" %s %b %<.*>"
+        }
+    },
+    "01-fr-mir-squid": {
+        "fullName": "Bibliothèques MIR squid",
+        "country": "FR",
+        "headers": {
+            "Log-Format-squid": "%ts.%03tu %6tr %>a %Ss/%03>Hs %<st %rm %ru %[un %Sh/%<a %mt"
+        }
+    },
+    "01-fr-inria": {
+        "fullName": "INRIA",
+        "country": "FR",
+        "headers": {
+            "Log-Format-squid": "%<A:%lp %>a %ui %[un [%tl] \"%rm %ru HTTP/%rv\" %>Hs %<st %<.*>",
+            "Crypted-Fields": "none"
+        }
+    },
+    "00-fr-insp-01": {
+        "fullName": "INSP",
+        "country": "FR",
+        "headers": {
+            "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{EnaDescription}<[^\"]+>\" \"%{EnaDepartment}<[^\"]+>\" \"%{EnaCompany}<[^\"]+>\" \"%{EnaJobTitle}<[^\"]+>\" \"%{EnaCity}<[^\"]+>\" \"%<(?:[a-z]+=)?>%{memberOf0}<[^\"]+>\" \"%<(?:[a-z]+=)?>%{memberOf1}<[^\"]+>\" \"%<(?:[a-z]+=)?>%{memberOf2}<[^\"]+>\" \"%<(?:[a-z]+=)?>%{memberOf3}<[^\"]+>\" \"%<(?:[a-z]+=)?>%{memberOf4}<[^\"]+>\" \"%<(?:[a-z]+=)?>%{memberOf5}<[^\"]+>\" \"%<(?:[a-z]+=)?>%{memberOf6}<[^\"]+>\"",
+            "Crypted-Fields": "host,login"
+        }
+    },
+    "10-us-psu": {
+        "fullName": "Lamson Library - Plymouth State University",
+        "country": "US",
+        "headers": {
+            "Log-Format-ezproxy": "%h %{session}<[a-zA-Z0-9\\-\\+]+> %l %u %t \"%r\" %s %b"
+        }
+    },
+    "10-ie-trinity": {
+        "fullName": "Trinity College Library Dublin",
+        "country": "IE",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{ezproxy-protocol}"
+        }
+    },
+    "10-ca-bpl": {
+        "fullName": "Burnaby Public Library",
+        "country": "CA",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %t \"%r\" %s %b"
+        }
+    },
+    "10-us-vul": {
+        "fullName": "Vanderbilt University Library - Nashville",
+        "country": "US",
+        "headers": {
+            "Log-Format-ezproxy": "%h %{session}<[a-zA-Z0-9\\-\\+]+> %u %t \"%r\" %s %b %{referer}<.*?> %{fullname}<[A-Za-z\\-0-9']*>",
+            "Output-Fields": "+fullname,-referer"
+        }
+    },
+    "10-us-nsc": {
+        "fullName": "Nevada State College - Henderson",
+        "country": "US",
+        "headers": {
+            "Log-Format-ezproxy": "%h %<\\t> %{identd}<[^ ]+> %<\\t> %{login}<[^ ]+> %<\\t> %t %<\\t> \"%r\" %<\\t> %s %<\\t> %b %<\\t> %{ezproxy-session}<[A-Za-z0-9 \\-]+> %<\\t> %{processtime}<[0-9 \\-]+> %<\\t> \"%{referer}<[^ ]+>\" %<\\t> \"%{user-agent}<.*>\" %<\\t> %{ezproxy-platform}<[^ ]+> %<\\t> %{ezproxy-database}<[^ ]+> %{endofline}<.*>",
+            "Crypted-Fields": "none"
+        }
+    },
+    "10-us-uml": {
+        "fullName": "University of Minnesota Libraries",
+        "country": "US"
+    },
+    "10-us-emory": {
+        "fullName": "Emory University",
+        "country": "US",
+        "headers": {
+            "Log-Format-ezproxy": "%h %{ezproxy-session}i %u %t \"%r\" %s %b %{referer}<[^ ]+> %{ezproxy-groups}<[a-zA-Z0-9+]+>"
+        }
+    },
+    "10-us-loy": {
+        "fullName": "Loyola University Chicago",
+        "country": "US",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{referer}<.*?>"
+        }
+    },
+    "10-us-hofs": {
+        "fullName": "Hofstra University",
+        "country": "US",
+        "headers": {
+            "Log-Format-ezproxy": "%{datetime}<\\d{4}/\\d{2}/\\d{2}:\\d{2}:\\d{2}:\\d{2}>%<\\t>%h%<\\t>%u%<\\t>%{ezproxy-spuaccess}%<\\t>%{domain}<[a-z.]+>%<\\t>%U%<\\t>%s%<\\t>%{user-agent}<.*>"
+        }
+    },
+    "10-us-uond": {
+        "fullName": "University of Notre Dame",
+        "country": "US",
+        "headers": {
+            "Log-Format-ezproxy": "%h%<[\t]>%l%<[\t]>%u%<[\t]>%t%<[\t]>\"%r\"%<[\t]>%s%<[\t]>%b%<[\t]>%{rest}<.*>"
+        }
+    },
+    "10-us-uond-old": {
+        "fullName": "University of Notre Dame < 2016",
+        "country": "US",
+        "headers": {
+            "Log-Format-ezproxy": "%h%<\t>%l%<\t>%u%<\t>%t%<\t>%U%<\t>%<\">%{a}%<[^\t]+>%<\">%<\t>%s%<\t>%b%<\t>%{b}%<[^\t]+>%<\t>%<\">%{c}%<[^\t]+>%<\">"
+        }
+    },
+    "10-us-uond-2016-3": {
+        "fullName": "University of Notre Dame 2016-3",
+        "country": "US",
+        "headers": {
+            "Log-Format-ezproxy": "%h%<\t>%l%<\t>%u%<\t>%t%<\t>%U%<\t>\"%r\"%<\t>%s%<\t>%b%<\t>%{origin}<.*>%<\t>%<\">%{ua}<[^\"]+>%<\">"
+        }
+    },
+    "10-sg-nusl": {
+        "fullName": "Singapore Management University",
+        "country": "SG",
+        "headers": {
+            "Log-Format-ezproxy": "%h %u %{user1}<.*> %t \"%r\" %s %b %{referer}<.*>"
+        }
+    },
+    "01-fr-ampt": {
+        "fullName": "Archive ouverte Art et Metier ParisTech",
+        "country": "FR",
+        "headers": {
+            "Force-Parser": "sam",
+            "Output-Fields": "+pid,+robot,+doi,-domain,-eissn,-title,-login,-print_identifier,-online_identifier,-publication_title,-publication_date,-type,-identd",
+            "ezPAARSE-Middlewares": "bot-ua-detector,robots",
+            "ezPAARSE-Enrich": "false",
+            "Disable-Filters": "all",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-uoak": {
+        "fullName": "Univ OAK : Open Access to Knowledge",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %{user}<\"?[0-9a-z-]*\"?> %t \"%r\" %s %b \"%{referer}<[^ ]+>\" \"%{user-agent}<.*>\"",
+            "Force-Parser": "uoak",
+            "Output-Fields": "+pid,+robot,+doi,-domain,-eissn,-title,-login,-print_identifier,-online_identifier,-publication_title,-publication_date,-type,-identd",
+            "ezPAARSE-Middlewares": "bot-ua-detector,robots",
+            "Disable-Filters": "all",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-oatao": {
+        "fullName": "OATAO (Open Archive Toulouse Archive Ouverte)",
+        "country": "FR",
+        "headers": {
+            "Force-Parser": "oatao",
+            "Output-Fields": "+pid,+robot,+doi,-domain,-eissn,-title,-login,-print_identifier,-online_identifier,-publication_title,-publication_date,-type,-identd",
+            "ezPAARSE-Middlewares": "bot-ua-detector,robots",
+            "Disable-Filters": "all",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-angers": {
+        "fullName": "Archive ouverte Université Angers",
+        "country": "FR",
+        "headers": {
+            "Log-Format-apache": "%<[a-zA-Z0-9\\+\\-.:]+> %h %l %u %t \"%r\" %>s %b \"%<[^\"]+>\" \"%<.*>\"",
+            "Force-Parser": "ao",
+            "Output-Fields": "+pid,-domain,-doi,-eissn,-title,-identid",
+            "Crypted-Fields": "none"
+        }
+    },
+    "10-au-sydney": {
+        "fullName": "University of Sydney",
+        "country": "AU",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %{ezproxy-session}<.+?> %{ezproxy-spuaccess}<.+?> %t \"%r\" %s %b \"%{x-forwarded-for}<.+?>\""
+        }
+    },
+    "10-au-rmit": {
+        "fullName": "Melbourne - RMIT University",
+        "country": "AU",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{referer}<.*?>"
+        }
+    },
+    "10-ire-ucd": {
+        "fullName": "University College Dublin Library",
+        "country": "IE",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{user-agent}<.+>\" %{domain}<.+>"
+        }
+    },
+    "01-fr-mines-paristech-squid": {
+        "fullName": "MINES ParisTech squid",
+        "country": "FR",
+        "headers": {
+            "Log-Format-squid": "%ts.%tu %<st %>a %Ss/%>Hs %tr %rm %ru %[un HIER_DIRECT/%<a %mt",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-ro-edulib-museproxy": {
+        "fullName": "MuseKnowledge™ Proxy",
+        "country": "RO",
+        "headers": {
+            "Log-Format-ezproxy": "%{datetime}<\\d{4}\\-\\d{2}\\-\\d{2} \\d{2}:\\d{2}:\\d{2}>.%<\\d{3}> EET NOTICE: []: connection.id=%l %h %<[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+> \"%r\" %s %b",
+            "Accept": "text/tab-separated-values",
+            "COUNTER-Reports": "jr1",
+            "COUNTER-Format": "tsv",
+            "Geoip": "all",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-enpc": {
+        "fullName": "ENPC - Ecole des Ponts ParisTech",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{unite-ldap}"
+        }
+    },
+    "01-fr-univ-catholille-brut": {
+        "fullName": "Université Catholique de Lille - Format Brut",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %{ezproxy-session}<[a-zA-Z0-9]+> %{from}<[^ ]+> %t \"%r\" %s %b"
+        }
+    },
+    "01-fr-hospices-civil-lyon": {
+        "fullName": "Hospices Civils de Lyon",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%t;%h;%{cs-auth-group}<[^ ]+>;%U;%{s-action}<.*>;%u;%{metier}<[.'_\\-a-zA-Z, ]+>;%{pam}<[\\-a-zA-Z ]+>",
+            "Date-Format": "YYYY-MM-DD HH:mm:ss"
+        }
+    },
+    "01-fr-hospices-civil-lyon-02": {
+        "fullName": "Hospices Civils de Lyon - SGOS-NCSA",
+        "country": "FR",
+        "headers": {
+            "Log-Format-apache": "%h %l %u %t %r %>s %b"
+        }
+    },
+    "01-fr-univ-catholille-enrichis": {
+        "fullName": "Université Catholique de Lille - Format Enrichi",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %{ldap1}<[^ ]+> %{ldap2}<[^ ]+> %{hash}<[^ ]+> %{ezproxy-session}<[a-zA-Z0-9]+> %{from}<[^ ]+> %t \"%r\" %s %b"
+        }
+    },
+    "01-fr-cnam-paris": {
+        "fullName": "Conservatoire national des arts et métiers - Paris",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{ezproxy-session}<.+?> %{ezproxy-groups}<.+?> %{ezproxy-cnam_supannetablissement}<[^ ]*> %{ezproxy-cnam_eduPersonAffiliation}<[^ ]*> %{ezproxy-cnam_edupersonprimaryaffiliation}<[^ ]*>"
+        }
+    },
+    "01-fr-sciences-po-paris": {
+        "fullName": "Sciences Po Paris ez01",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{ezproxy-groups}<.*?>\" \"%{referer}<.*?>\" \"%{user-agent}<.*?>\""
+        }
+    },
+    "01-fr-sciences-po-paris-02": {
+        "fullName": "Sciences Po Paris (avant le 07/07/2021)",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{referer}<.*?>\" \"%{user-agent}<.*?>\" %{ezproxy-session} %{ezproxy-groups}<[a-zA-Z+.-]+> %{affiliation} %{primary-affiliation} %{protocol} %{resource}<[^\\s]*> %{ezproxy-domain}<[a-zA-Z0-9.:-]+>"
+        }
+    },
+    "01-fr-sciences-po-paris-03": {
+        "fullName": "Sciences Po Paris (de 07/2021 à 08/2025)",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %{session-uid}<.*> %u %t \"%r\" %s %b \"%{referer}<.*>\" \"%{user-agent}<.*>\" %{ezproxy-session} %{ezproxy-groups}<.*> %{ezproxy-usrvar1}<.*> %{ezproxy-usrvar2}i %{ezproxy-protocol}i %{ezproxy-url1}<.*> %{v}<.*>"
+        }
+    },
+    "01-fr-sciences-po-lyon": {
+        "fullName": "Sciences Po Lyon",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %t \"%r\" %s %b %<[^\\s]+> <%U>"
+        }
+    },
+    "01-fr-univ-ubs-01": {
+        "fullName": "Université Bretagne Sud",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %l %{session}<.*> - %u - %t \"%r\" %s %b - %<[\\[']{0,2}>%{code_centregestion}<[0-9A-Za-z]*>%<[;]?>%{code_composante}<[0-9]*>%<[;]?>%{code_etape}<[0-9A-Za-z]*>%<[;]?>%<[ville=]{0,6}>%{ville}<[A-Za-z]*>%<[;]?>%<[\\]']{0,2}> %<[- ]*>%<[\\[']?>%{code_structure}<[0-9A-Za-z]*>%<[, ']*>%{code_labo}<[0-9A-Za-z]*>%<[', 0-9A-Za-z\\]]*>",
+            "Crypted-Fields": "host,login"
+        }
+    },
+    "01-fr-univ-bordeaux-01": {
+        "fullName": "Université Bordeaux",
+        "country": "FR",
+        "headers": {
+            "Log-Format-ezproxy": "%h %{ezproxy-session} %u %t \"%r\" %s %b \"%{affiliation}<[a-z:0-9]*>\" \"%{dept}<[0-9]*>\" \"%{labo}<[0-9]*>\" \"%{niveau}<[0-9a-zA-Z]*>\" \"%{college}<[0-9]*>\" \"%{UF}<[0-9]*>\" \"%{etape}<[a-z:0-9]*>\"",
+            "Crypted-Fields": "host,login"
+        }
+    },
+    "01-fr-paris-saclay-01": {
+        "fullName": "Paris-Saclay",
+        "country": "FR",
+        "headers": {
+            "Accept": "text/csv",
+            "Traces-Level": "info",
+            "Log-Format-ezproxy": "%h %l %u %{ezproxy-session}i %t \"%r\" %s %b",
+            "Crypted-Fields": "host,login",
+            "ezPAARSE-Middlewares": "(before cut) populate",
+            "Extract": "login => /(.*)@([^\\.]*)?\\.?([^\\.]*)\\.?(psl)(\\.eu)/ => identifiant, domainName",
+            "populate-fields": "{\"domainName\" : \"psl\"}"
+        }
+    },
+    "01-fr-univ-nc-01": {
+        "fullName": "Université Nouvelle Calédonie",
+        "country": "FR",
+        "headers": {
+            "Accept": "text/csv",
+            "Traces-Level": "info",
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{code_type_ind}<[^ ]*> %{d}<[^ ]*> %{c}<[^ ]*> %{n}<[^ ]*> %{s}<.*>",
+            "Crypted-Fields": "host,login"
+        }
+    },
+    "00-fr-omeka": {
+        "fullName": "Omeka",
+        "country": "FR",
+        "headers": {
+            "Accept": "text/csv",
+            "Force-Parser": "omeka",
+            "Traces-Level": "info",
+            "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b %<\\s*>\"%{referrer}<.*?>\" \"%{user-agent}<.*?>\"",
+            "Crypted-Fields": "host,login",
+            "ezPAARSE-Middlewares": "omeka, populate, user-agent-parser",
+            "Output-Fields": "+ark"
+        }
+    },
+    "00-fr-omekas": {
+        "fullName": "Omekas",
+        "country": "FR",
+        "headers": {
+            "Accept": "text/csv",
+            "Force-Parser": "omekas",
+            "Traces-Level": "info",
+            "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b %<\\s*>\"%{referrer}<.*?>\" \"%{user-agent}<.*?>\"",
+            "Crypted-Fields": "host,login",
+            "Output-Fields": "+ark",
+            "ezPAARSE-Middlewares": "populate, omekas, user-agent-parser"
+        }
+    },
+    "00-fr-doranum": {
+        "fullName": "Doranum",
+        "country": "FR",
+        "headers": {
+            "Accept": "text/csv",
+            "Force-Parser": "doranum",
+            "Traces-Level": "info",
+            "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b %<\\s*>\"%{referrer}<.*?>\" \"%{user-agent}<.*?>\"",
+            "Crypted-Fields": "host,login",
+            "ezPAARSE-Middlewares": "datacite, user-agent-parser"
+        }
+    },
+    "01-fr-open-edition-02": {
+        "fullName": "Open Edition 02",
+        "country": "FR",
+        "headers": {
+            "Accept": "text/csv",
+            "Traces-Level": "info",
+            "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{referer}<.*?>\" \"%{user-agent}<.*?>\" \"%{delivered_content}\"",
+            "Crypted-Fields": "session_id,user_id",
+            "Output-Fields": "-login,-on-campus,-identd,-middlewares,-size,-host,-domain",
+            "ezPAARSE-Middlewares": "session-id",
+            "Reject-Files": "all",
+            "Clean-Only": "0",
+            "oe-ttl": "604800",
+            "oei-ttl": "604800",
+            "oe-cache": "true",
+            "oei-cache": "true",
+            "oe-packet-size": "10",
+            "oei-packet-size": "5",
+            "oe-buffer-size": "100",
+            "oei-buffer-size": "100",
+            "ezPAARSE-Filter-Status": "200,304,401",
+            "oeat-ttl": "604800",
+            "oeat-cache": "true",
+            "oeat-packet-size": "20",
+            "oeat-buffer-size": "100",
+            "filter-platforms": "oe"
+        }
+    },
+    "00-fr-jle": {
+        "fullName": "JLE",
+        "country": "FR",
+        "headers": {
+            "Accept": "text/csv",
+            "Force-Parser": "jle",
+            "Traces-Level": "info",
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{referrer}<.*?>\" \"%{user-agent}<.*?>\" %{response-time}<[0-9.]+> \"%<.*?>\"",
+            "Crypted-Fields": "host,login"
+        }
+    },
+    "00-fr-uco-scolarite": {
+        "fullName": "Université Catholique de l'Ouest",
+        "country": "FR",
+        "headers": {
+            "Accept": "text/csv",
+            "Traces-Level": "info",
+            "Log-Format-ezproxy": "%h %l %l %t \"%r\" %s %b %{etudiant}<[a-zA-Z0-9\\-\\+]+>",
+            "Crypted-Fields": "host,login"
+        }
+    },
+    "00-fr-prairial": {
+        "fullName": "Publications Prairial",
+        "country": "FR",
+        "headers": {
+            "Accept": "text/csv",
+            "Traces-Level": "info",
+            "Crypted-Fields": "host,login",
+            "ezPAARSE-Middlewares": "(before filter) populate",
+            "Populate-Fields": "{ \"domain\": \"publications-prairial.fr\" }"
+        }
+    },
+    "00-fr-prairial-rifrancophonies": {
+        "fullName": "Rifrancophonies",
+        "country": "FR",
+        "headers": {
+            "Accept": "text/csv",
+            "Traces-Level": "info",
+            "Crypted-Fields": "host,login",
+            "ezPAARSE-Middlewares": "(before filter) populate",
+            "Populate-Fields": "{ \"domain\": \"rifrancophonies.com\" }"
+        }
+    },
+    "00-fr-prairial-alyoda": {
+        "fullName": "Alyoda",
+        "country": "FR",
+        "headers": {
+            "Accept": "text/csv",
+            "Traces-Level": "info",
+            "Crypted-Fields": "host,login",
+            "ezPAARSE-Middlewares": "(before filter) populate",
+            "Populate-Fields": "{ \"domain\": \"alyoda.eu\" }"
+        }
+    },
+    "bibliomap": {
+        "fullName": "BIBLIOMAP-BIBCNRS",
+        "country": "FR",
+        "headers": {
+            "Accept": "text/csv",
+            "Traces-Level": "info",
+            "Log-Format-ezproxy": "%h %{ezproxy-session} %l %u %t \"%r\" %s %b %{bib-groups}<[a-zA-Z0-9@\\.\\-_%\\,=\\+]+>",
+            "Crypted-Fields": "login,user",
+            "Output-Fields": "+bib-groups",
+            "ezPAARSE-Middlewares": "ebscohost,populate",
+            "extract": "login => /^([^_]+)_O_([^_]+)_I_([^_]+)_OU_([^_]+)$/ => user,section,department,unit"
+        }
     }
-  },
-  "00-fr-inist": {
-    "fullName": "INIST-CNRS",
-    "country": "FR",
-    "headers": {
-      "Crypted-Fields": "none"
-    }
-  },
-  "00-fr-bibcnrs": {
-    "fullName": "INIST-BIBCNRS",
-    "country": "FR",
-    "headers": {
-      "Accept": "text/csv",
-      "Traces-Level": "info",
-      "Log-Format-ezproxy": "%h %{ezproxy-session} %l %u %t \"%r\" %s %b %{bib-groups}<[a-zA-Z0-9@\\.\\-_%\\,=\\+]+>",
-      "Crypted-Fields": "login,user",
-      "Output-Fields": "+bib-groups",
-      "ezPAARSE-Middlewares": "(after crossref) ezunpaywall,ebscohost,populate",
-      "extract": "login => /^([^_]+)_O_([^_]+)_I_([^_]+)_OU_([^_]+)$/ => user,section,department,unit"
-    }
-  },
-  "00-fr-inist-webservices": {
-    "fullName": "INIST-CNRS - Webservices (Istex TDM)",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{referer}<.*?>\" \"%{user-agent}<.*?>\" %{request-id}<\\d+> \"Router-%{container-name}<.*?>@file\" \"%{server-name}<.*?>\" %{elapsed}<[0-9]+>ms",
-      "Force-Parser": "istextdm",
-      "Double-Click-Removal": "false",
-      "ezPAARSE-Filter-Redirects": "false",
-      "Output-Fields": "+sid"
-    }
-  },
-  "00-fr-bibinserm": {
-    "fullName": "INSERM",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %{ezproxy-session} %l %{login}<[a-zA-Z0-9@._%,='+-]+> %t \"%r\" %s %b %{bib-groups}<[a-zA-Z0-9@\\.\\-_%\\,=\\+]+>",
-      "Crypted-Fields": "none",
-      "Output-Fields": "+bib-groups",
-      "extract": "login => /^([^_]+)_O_([^_]+)_I_([^_]+)_OU_([^_]+)_I_([^_]+)_DR_([^_]+)_SITE_([^_]+)$/ => unit1,section,department,unit2,it,loc,site",
-      "ezPAARSE-Middlewares": "ebscohost,populate"
-    }
-  },
-  "00-fr-inist-irevues-dspace": {
-    "fullName": "INIST-CNRS - Irevues - Dspace",
-    "country": "FR",
-    "headers": {
-      "Crypted-Fields": "none",
-      "Log-Format-apache": "%h %l %u %t %r %>s %b",
-      "Force-Parser": "dspace",
-      "Force-ECField-Publisher": "Irevues",
-      "Disable-Filters": "robots",
-      "Output-Fields": "+pid,+robot,-domain,-online_identifier,-print_identifier,-platform_name,-identd"
-    }
-  },
-  "00-fr-inist-irevues-lodel": {
-    "fullName": "INIST-CNRS - Irevues - Lodel",
-    "country": "FR",
-    "headers": {
-      "Crypted-Fields": "none",
-      "Force-Parser": "lodel",
-      "Force-ECField-Publisher": "Irevues",
-      "Disable-Filters": "robots",
-      "Output-Fields": "+pid,+robot,-domain,-online_identifier,-print_identifier,-platform_name,-identd",
-      "Log-Format-Apache": "%{host}<[a-zA-Z0-9.\\-:]+(?:, ?[a-zA-Z0-9.\\-:]+)*> %l %u %t \"%r\" %>s %b \"%{referer}<[^ \"]+>\" \"%{user-agent}<[^\"]+>\""
-    }
-  },
-  "01-fr-ezunpaywall-01": {
-    "fullName": "ezUnpaywall",
-    "country": "FR",
-    "headers": {
-      "Crypted-Fields": "none",
-      "Accept": "text/csv",
-      "Force-Parser": "ezupw",
-      "Force-ECField-Publisher": "ezUnpaywall",
-      "Traces-Level": "info",
-      "Log-Format-apache": "%h \"%{login}<[a-zA-Z0-9@\\.\\-_%,=\\&\\ ]+>\" %t \"%r\" %>s %b \"%{referer}<[^\"]*>\" \"%{response_time}<[0-9.]+>%<[^\"]*>\" \"%{user-agent}<[^\"]*>\" %{doi_count}<[^ ]*>",
-      "Double-Click-Removal": "false",
-      "ezPAARSE-Middlewares": "populate,user-agent-parser",
-      "Output-Fields": "+sid,-print_identifier,-online_identifier,-publication_title,-unitid,-domain,-on_campus"
-    }
-  },
-  "00-fr-inist-irevues-lodel-old": {
-    "fullName": "INIST-CNRS - Irevues - Lodel (jusqu'au 13/11/2018)",
-    "country": "FR",
-    "headers": {
-      "Crypted-Fields": "none",
-      "Force-Parser": "lodel",
-      "Force-ECField-Publisher": "Irevues",
-      "Disable-Filters": "robots",
-      "Output-Fields": "+pid,+robot,-domain,-online_identifier,-print_identifier,-platform_name,-identd"
-    }
-  },
-  "00-fr-panist": {
-    "fullName": "PANIST",
-    "country": "FR",
-    "headers": {
-      "EZPAARSE-Filter-Status": "false",
-      "Force-Parser": "panist",
-      "panist-enrich": "true",
-      "panist-ttl": "3600",
-      "Crypted-Fields": "none",
-      "crossref-enrich": "false",
-      "ezPAARSE-Middlewares": "panist, user-agent-parser",
-      "Log-Format-apache": "%h %<\"?>%{istex-id}<[^ ]+?>%<\"?> %<\"?>%{owner}<[^\"]+>%<\"?> %<\"?>%{idp}<[^\"]+>%<\"?> %u %t \"%{method}<[A-Z]+> %U %<[^ ]+>\" %{status}<[0-9\\-]+> %b \"%{referer}<[^\"]+>\" \"%{user-agent}<[^\"]+>\" %{sid}<[^ ]+> %<\"?>%{auth}<[^ \"]+>%<\"?>",
-      "Output-Fields": "+login,+istex_rtype,+istex_genre,+ark,-platform,+publisher_name,+language,+publication_date,+subject,-identd,-domain,+doi-publication-date-year,+istex_bundle_size"
-    }
-  },
-  "00-fr-istex": {
-    "fullName": "ISTEX",
-    "country": "FR",
-    "headers": {
-      "EZPAARSE-Filter-Status": "false",
-      "Force-Parser": "istex",
-      "istex-enrich": "true",
-      "istex-ttl": "3600",
-      "Crypted-Fields": "host",
-      "crossref-enrich": "false",
-      "ezPAARSE-Middlewares": "(before istex) user-agent-parser | (after istex) cut,ip-to-abesid,idp-to-abesid,abesid-to-etab",
-      "Log-Format-apache": "%h %<\"?>%{istex-id}<[^ ]+?>%<\"?> %<\"?>%{owner}<[^\"]+>%<\"?> %<\"?>%{idp}<[^\"]+>%<\"?> %u %t \"%{method}<[A-Z]+> %U %<[^ ]+>\" %{status}<[0-9\\-]+> %b \"%{referer}<[^\"]+>\" \"%{user-agent}<[^\"]+>\" %{sid}<[^ ]+> %<\"?>%{auth}<[^ \"]+>%<\"?>",
-      "Output-Fields": "+login,+istex_rtype,+istex_genre,+ark,+publisher_name,+language,+publication_date,+subject,+doi-publication-date-year,+istex_bundle_size,+access_type,+oa_status,+abes-id,+institutionName,-platform,-identd,-domain",
-      "ip-to-abesid-source-field": "host",
-      "ip-to-abesid-enriched-field": "abes-id",
-      "abesid-to-etab-source-field": "abes-id",
-      "abesid-to-etab-enriched-fields": "{ \"Nom Etablissement\": \"institutionName\" }",
-      "idp-to-abesid-enriched-field": "abes-id",
-      "idp-to-abesid-source-field": "istex-id",
-      "extract": "istex-id=>/^(ABES.*)/=>abes-id"
-    }
-  },
-  "00-fr-istex-1": {
-    "fullName": "ISTEX(de 19/10/2016 à 22/09/2017)",
-    "country": "FR",
-    "headers": {
-      "EZPAARSE-Filter-Status": "false",
-      "Force-Parser": "istex",
-      "istex-enrich": "true",
-      "istex-ttl": "3600",
-      "Crypted-Fields": "none",
-      "crossref-enrich": "false",
-      "ezPAARSE-Middlewares": "(before istex) user-agent-parser",
-      "Log-Format-apache": "%h %<\"?>%{istex-id}<[^ ]+?>%<\"?> %<\"?>%{owner}<[^\"]+>%<\"?> %u %t \"%r\" %{status}<[0-9]+> %b \"%{referer}<[^\"]+>\" \"%{user-agent}<[^\"]+>\" %{sid}<[^ ]+>",
-      "Output-Fields": "+login,+istex_rtype,+istex_genre,+ark,-platform,+publisher_name,+language,+publication_date,+subject,-identd,-domain,+doi-publication-date-year,+istex_bundle_size"
-    }
-  },
-  "00-fr-istex-2": {
-    "fullName": "ISTEX-LIGHT (avant 18/10/2016)",
-    "country": "FR",
-    "headers": {
-      "EZPAARSE-Filter-Status": "false",
-      "Force-Parser": "istex",
-      "istex-enrich": "true",
-      "istex-ttl": "3600",
-      "Crypted-Fields": "none",
-      "crossref-enrich": "false",
-      "Output-Fields": "+login,+istex_rtype,+istex_genre,+ark,-platform,+publisher_name,+language,+publication_date,+subject,-identd,-domain,+doi-publication-date-year,+istex_bundle_size"
-    }
-  },
-  "00-fr-univ-lorr": {
-    "fullName": "Université de Lorraine",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %{session}<[a-zA-Z0-9\\-\\+]+> %u %t \"%r\" %s %b %{user}<[a-zA-Z0-9\\-\\+,]+>",
-      "Crypted-Fields": "none"
-    }
-  },
-  "00-fr-univ-lorr-docnum": {
-    "fullName": "Université de Lorraine - PETALE",
-    "country": "FR",
-    "headers": {
-      "Crypted-Fields": "none",
-      "Force-Parser": "docnum",
-      "Output-Fields": "+year,+institution,-login,-platform,-platform_name,-publisher_name,-rtype,-mime,-online_identifier,-print_identifier,-doi,-publication_title,-identd,-domain"
-    }
-  },
-  "00-fr-univ-brest": {
-    "fullName": "Université de Bretagne Occidentale",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{ufr}<.*> %{niveau}<.*>",
-      "Crypted-Fields": "host,login"
-    }
-  },
-  "00-fr-UPJV": {
-    "fullName": "Université Picardie Jules Verne",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %{ezproxy-session} %t \"%r\" %s %b %{categ}<[^ ]+> %{niveau}<[^ ]+> \"%{affect}<[^\"]+>\"",
-      "Crypted-Fields": "none"
-    }
-  },
-  "00-fr-univ-polynesie": {
-    "fullName": "Université de Polynésie Française",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %{ezproxy-groups}i %t \"%r\" %s %b",
-      "Crypted-Fields": "host,login"
-    }
-  },
-  "00-fr-univ-savoie": {
-    "fullName": "Université Savoie Mont Blanc",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%{datesyslog}<[\\w\\ ]+> %{heure_syslog}<[\\d:]+\\w> %{serveur_grenet}<[\\w-]+> %{ezproxy_instance}<[\\w-]+>%<: >%{site}<[a-z-0-9.]+>%<:[0-9]+> %h %{ezproxy-groups}<[\\w+\\-.]+> %{ezproxy-session}<[\\w-_]+> %u %t \"%r\" %s %b",
-      "Crypted-Fields": "host,login"
-    }
-  },
-  "00-fr-univ-savoie-heberge": {
-    "fullName": "Université Savoie Mont Blanc Hebergé",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %{ezproxy-session}<[\\w+\\-.]+> %t \"%r\" %s %b \"%{ezproxy-groups}<[\\w+\\-.]+>\" \"%{referer}<[^ ]+>\" \"%{user-agent}<.*>\"",
-      "Crypted-Fields": "host,login"
-    }
-  },
-  "00-fr-univ-grenoble": {
-    "fullName": "Université de Grenoble",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%{datesyslog}<[\\w\\ ]+> %{heure_syslog}<[\\d:]+\\w> %{serveur_grenet}<\\w+> %{ezproxy_instance}<[\\w-]+>%<: >%{site}<[a-z-0-9.]+>%<:[0-9]+> %h %{ezproxy-groups}<[\\w+\\-.]+> %{ezproxy-session}<[\\w-_]+> %u %t \"%r\" %s %b",
-      "Crypted-Fields": "none"
-    }
-  },
-  "00-fr-univ-grenoble-02": {
-    "fullName": "Université de Grenoble-Alpes",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%{datesyslog}<[\\w\\ ]+> %{heure_syslog}<[\\d:]+\\w> %{serveur_grenet}<[\\w-]+> %{ezproxy_instance}<[\\w-]+>%<: >%{site}<[a-z-0-9.]+>%<:[0-9]+> %h %{ezproxy-groups}<[\\w+\\-.]+> %{ezproxy-session}<[\\w-_]+> %u %t \"%r\" %s %b %{etablissement}<[\\w\\-_]+> %{statut}<[\\w\\-_]+> %{formation}<[\\w\\-_.]+> %{structure}<[\\w\\-_.]+> %{niveau}<[\\w\\-_.]+> %{discipline}<[\\w\\-_.]+>>",
-      "Crypted-Fields": "host,login"
-    }
-  },
-  "00-fr-univ-grenoble-01": {
-    "fullName": "Université de Grenoble - log enrichis",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%{datesyslog}<[\\w\\ ]+> %{heure_syslog}<[\\d:]+\\w> %{serveur_grenet}<\\w+> %{ezproxy_instance}<[\\w-]+>%<: >%{site}<[a-z-0-9.]+>%<:[0-9]+> %h %{ezproxy-groups}<[\\w+\\-.]+> %{ezproxy-session}<[\\w-_]+> %u %t \"%r\" %s %b %<etab:>%{etab}<[\\w-_]+> %<group_structure:>%{group_structure}<[\\w_,]*> %<group_SHS:>%{group_shs}<[A-Za-z_,-]+> %<group_gael:>%{group_gael}<[\\w_,]+> %<status:>%{status_user}<[A-Z,\\s-]+>%<auto_ip:>%{auto_ip}<[\\w]+>",
-      "Crypted-Fields": "host,login"
-    }
-  },
-  "00-fr-univ-bordeaux-01": {
-    "fullName": "Université de Bordeaux Montaigne",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{ezproxy-session}<[^ ]+>%<[\\s]*>%{UFR}<[A-Z]*>%<[\\s]*>%{statusPerson}<[A-Za-z+]*>",
-      "Crypted-Fields": "host,login"
-    }
-  },
-  "00-fr-univ-bordeaux-02": {
-    "fullName": "Université de Bordeaux Montaigne > 19/03/2019",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{ezproxy-session}%<[\\s]*>%{statusPerson}<[A-Za-z+-]*>%<[\\s]*>%{UFR}<[A-Za-z_+-]*>%<[\\s]*>%{department}<[A-Za-z0-9+-]*>",
-      "Crypted-Fields": "host,login"
-    }
-  },
-  "00-fr-univ-lemans-00": {
-    "fullName": "Université du Maine > 24/04/2018",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b%{composante}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{libetape}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\: ]+>%<[\\;]>%{affiliation}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\ ]+>%<[\\;]>%{codeetape}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\ ]+>%<[\\;]>%{enseignant}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{description}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{niveau}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{typepopulation}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{codeaffectation}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\; ]>%{webaffectation}<[a-zA-Z0-9@\\. \\ -\\_%\\,=\\+\\'\\ ]+>%<[\\; ]>",
-      "Crypted-Fields": "host,login",
-      "Output-Fields": "+pii,+sudoc-ppn",
-      "Sudoc-enrich": "true"
-    }
-  },
-  "00-fr-univ-lemans-01": {
-    "fullName": "Université du Maine > 24/03/2017 < 24/04/2018",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{composante}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{libetape}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{affiliation}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\ ]+>%<[\\;]>%{codeetape}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\ ]+>%<[\\;]>%{enseignant}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>%<[\\;]>%{description}<[a-zA-Z0-9@\\.\\-_%\\,=\\+\\'\\ ]+>",
-      "Crypted-Fields": "none"
-    }
-  },
-  "00-fr-univ-fc": {
-    "fullName": "Université de Franche Comté",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%{login}<[^\\s]*[@0-9A-Z]*> %t \"%r\" %s %b",
-      "Crypted-Fields": "none",
-      "extract": "login => split(@) => c1,c2,c3,c4,c5,c6,c7"
-    }
-  },
-  "00-fr-hal": {
-    "fullName": "HAL - Archives Ouvertes",
-    "country": "FR",
-    "headers": {
-      "Log-Format-apache": "%{Syslog_Date}<[a-zA-Z]{3} +\\d{1,2} +\\d{2}:\\d{2}:\\d{2}> %{Machine_Name} %{httpd}: %{domain}<[\\w.-]+> %h - - %t \"%r\" %>s %b \"%{Referer}<.+?>\" \"%{user-agent}<.*>\"",
-      "Crypted-Fields": "none",
-      "Force-Parser": "hal",
-      "Hal-enrich": "true",
-      "ezPAARSE-Middlewares": "bot-ua-detector,trackcode-generator,robots",
-      "ezPAARSE-Filter-Redirects": "false",
-      "Output-Fields": "-login,-platform,-platform_name,-publisher_name,-online_identifier,-print_identifier,-unitid,-identd,-subject,-publication_date,+hal_fulltext,+hal_identifiant,+hal_consult_collection,+hal_consult_collection_sid,+hal_docid,+hal_endpoint_portail,+hal_endpoint_portail_sid,+hal_redirect_portail,+hal_redirect_start_portail,+hal_tampons,+hal_tampons_name,+hal_domains,+trackcode,+hal_redirection,-date,-Syslog_Date,-httpd,-type,-title_id,-doi"
-    }
-  },
-  "00-fr-hal2016": {
-    "fullName": "HAL - Avant 2016",
-    "country": "FR",
-    "headers": {
-      "Log-Format-apache": "%h - - %t \"%r\" %>s %b \"%{Referer}<.+?>\" \"%{user-agent}<.*>\"",
-      "Crypted-Fields": "none",
-      "Force-Parser": "hal",
-      "Hal-enrich": "true",
-      "ezPAARSE-Middlewares": "bot-ua-detector,trackcode-generator,robots",
-      "ezPAARSE-Filter-Redirects": "false",
-      "Output-Fields": "-login,-platform,-platform_name,-publisher_name,-online_identifier,-print_identifier,-unitid,-identd,-subject,-publication_date,+hal_fulltext,+hal_identifiant,+hal_consult_collection,+hal_consult_collection_sid,+hal_docid,+hal_endpoint_portail,+hal_endpoint_portail_sid,+hal_redirect_portail,+hal_redirect_start_portail,+hal_tampons,+hal_tampons_name,+hal_domains,+trackcode,+hal_redirection,-date,-Syslog_Date,-httpd,-type,-title_id,-doi"
-    }
-  },
-  "00-eu-openaire": {
-    "fullName": "OpenAIRE - Archives Ouvertes",
-    "country": "Europe",
-    "headers": {
-      "Force-Parser": "openaire",
-      "Log-Format-apache": "%{piwik-ip}<.*> %h - - %t \"%{piwik}<.*>\" %>s - \"%U\" %{user-agent}<.*>"
-    }
-  },
-  "00-fr-bibcnrs-bibapi": {
-    "fullName": "00-fr-bibcnrs-bibapi",
-    "country": "FR",
-    "headers": {
-      "Accept": "text/csv",
-      "Traces-Level": "info",
-      "ezPAARSE-Middlewares": "(only) crossref, ezunpaywall",
-      "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{user-agent}i<.*?>\" \"%{i}i<.*?>\" \"%{o}i<.*?>\" \"%{ou}i<.*?>\" \"%{portal}i<.*?>\" \"%{sid}i<.*?>\" \"%{doi}i<.*?>\""
-    }
-  },
-  "00-fr-clickandread": {
-    "fullName": "00-fr-clickandread",
-    "country": "FR",
-    "headers": {
-      "Accept": "text/csv",
-      "Traces-Level": "info",
-      "ezPAARSE-Middlewares": "(only) crossref, ezunpaywall",
-      "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{referer}i<.*?>\" \"%{user-agent}i<.*?>\" \"%{os}i<.*?>\" \"%{institutions}i<.*?>\" \"%{sources}i<.*?>\" \"%{sourcesOption}i<.*?>\" \"%{source}i<.*?>\" \"%{manifestVersion}i<.*?>\" \"%{grantee}i<.*?>\" \"%{doi}i<.*?>\" \"%{pii}i<.*?>\" \"%{pmid}i<.*?>\" \"%{idType}i<.*?>\""
-    }
-  },
-  "00-ge-ezproxy-1": {
-    "fullName": "EZproxy (with user-agent) : %h %l %u %t \"%r\" %s %b \"%{user-agent}<.*>\"",
-    "country": "Generic",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{user-agent}<.*>\""
-    }
-  },
-  "00-ge-ezproxy-2": {
-    "fullName": "EZproxy (with referer) : %t %h %{session} %U \"%{referer}<[^ ]+>\" %s",
-    "country": "Generic",
-    "headers": {
-      "Log-Format-ezproxy": "%t %h %{session} %U \"%{referer}<[^ ]+>\" %s"
-    }
-  },
-  "01-fr-full-enrichment": {
-    "fullName": "Enrichissement automatique",
-    "country": "FR",
-    "headers": {
-      "Crypted-Fields": "none",
-      "Output-Fields": "+pii,+sudoc-ppn",
-      "crossref-enrich": "true",
-      "sudoc-enrich": "true"
-    }
-  },
-  "01-fr-univ-pda": {
-    "fullName": "Université Paris Descartes Apache",
-    "country": "FR",
-    "headers": {
-      "Crypted-Fields": "none",
-      "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b %<.*>"
-    }
-  },
-  "01-fr-open-edition-01": {
-    "fullName": "Open Edition",
-    "country": "FR",
-    "headers": {
-      "Crypted-Fields": "session_id,user_id",
-      "Output-Fields": "-login,-on-campus,-identd,-middlewares,-size",
-      "Reject-Files": "all",
-      "Clean-Only": "0",
-      "ezPAARSE-Middlewares": "session-id",
-      "oe-ttl": "0",
-      "oei-ttl": "0"
-    }
-  },
-  "01-fr-univ-pdb": {
-    "fullName": "Université Paris Descartes Bibliopam",
-    "country": "FR",
-    "headers": {
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-rennes-1": {
-    "fullName": "Université de Rennes 1",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %u %{ezproxy-groups}i %t \"%r\" %s %b %<.*>",
-      "Output-Fields": "+ezproxy-groups",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-rennes-1-ezmesure": {
-    "fullName": "Université de Rennes 1 - ezMESURE",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %u %{ezproxy-groups}i %t \"%r\" %s %b %<.*>",
-      "Output-Fields": "+ezproxy-groups,+id,+pii,+sudocppn,+ezproxy-groups,-platform,-identd,-size,-status",
-      "Crypted-Fields": "host,login"
-    }
-  },
-  "01-fr-univ-evry-val-essonne": {
-    "fullName": "Université Evry Val d'Essonne",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" \"%{platform-name}<[a-zA-Z0-9 \\-]+>\" %s %b \"%{categorie}<.*>\" \"%{affiliation}<.*>\" \"%{etablissement}<.*>\" %{ipsortie}<.*>",
-      "Date-Format": "YYYY-MM-DD hh:mm:ss",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-rennes-2": {
-    "fullName": "Université de Rennes 2",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%<.*>\"",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-lyon-1": {
-    "fullName": "Université Lyon 1",
-    "country": "FR",
-    "headers": {
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-lyon-2": {
-    "fullName": "Université Lumière Lyon 2",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %u %{ezproxy-session}i %t \"%r\" %s %b %{request-duration}<[0-9]+>",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-lyon-3": {
-    "fullName": "Université Lyon 3",
-    "country": "FR",
-    "headers": {
-      "Accept": "text/csv",
-      "Traces-Level": "info",
-      "Log-Format-ezproxy": "%t %h %l %u %l \"%r\" %s %b \"%{user-agent}<.*>\"",
-      "Crypted-Fields": "host,login"
-    }
-  },
-  "01-fr-univ-lyon-3-02": {
-    "fullName": "Université Lyon 3 ( < 06/07/2021)",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%t %h - %u %l \"%r\" %s %b",
-      "Crypted-Fields": "none"
-    }
-  },
-  "00-fr-insa-lyon-01" : {
-  "fullName": "INSA Lyon",
-  "country": "FR",
-  "headers": {
-    "Accept": "text/csv",
-    "Traces-Level": "info",
-    "Log-Format-ezproxy": "%<.* Ezproxy: >%h %l %u %t \"%r\" %s %b %{ezproxygroups}<[a-zA-Z0-9\\-\\+]+>",
-    "Crypted-Fields": "host,login"
-  },
-  "01-fr-univ-strasbourg": {
-    "fullName": "Université de Strasbourg",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%t %h %s %u %U %b %{session}<[a-zA-Z0-9]+|\\->",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-essec": {
-    "fullName": "ESSEC Business School",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "SRC_IP=%h|EZP_ID=%{session}|USER=%u|START_TIME=%t|HTTP_REQUEST=%U|WEBSITE=%{website}<[a-z0-9\\.\\:]+>|HTTP_CODE=%s|NB_BYTES=%b|GROUPS=%{groups}<[_A-Z0-9\\+\\-]+>",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-toulouse-3": {
-    "fullName": "Université de Toulouse 3 BiblioPAM",
-    "country": "FR",
-    "headers": {
-      "Log-Format-apache": "%{epoch},%h,%b,%<[\"]?>%{ress-name}<[^\"]+?>%<[\"]?>,%U,%>s,%<[\"]?>%{mt}<[a-zA-Z0-9-/ \"=_+;.]+>%<[\"]?>,%{profil1}<[a-zA-Z0-9-/ \"=+;_]+>,%{uid},%{session-id},%<\"?>%{profil2}<[^\"]*?>%<\"?>",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-toulouse-1": {
-    "fullName": "Université de Toulouse 1 Capitole - BiblioPAM",
-    "country": "FR",
-    "headers": {
-      "Log-Format-apache": "%{epoch},%h,%b,%<[\"]?>%{ress-name}<[^\"]+?>%<[\"]?>,%U,%>s,%<[\"]?>%{mt}<[a-zA-Z0-9-/ \"=_+;.]+>%<[\"]?>,%{profil1}<[a-zA-Z0-9-/ \"=+;_]+>,%{uid},%{session-id},%<\"?>%{profil2}<[^\"]*?>%<\"?>",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-orleans-bibliopam": {
-    "fullName": "Université d'Orléans - BiblioPAM",
-    "country": "FR",
-    "headers": {
-      "Log-Format-apache": "%{timestamp}<[0-9]+>,%h,%b,%<\"?>%{ress-name}<[a-zA-Z0-9+&- :,.'éèàç]+>%<\"?>,%U,%>s,%<\"?>%{mt}<[a-zA-Z0-9+-/;= .]+>%<\"?>,%<\"?>%{profil}<[a-zA-Z0-9/ -_éèàç]*>,%{uid}<[a-zA-Z0-9]*>,%{session-id}<[a-zA-Z0-9]*>,",
-      "Crypted-Fields": "host,login"
-    }
-  },
-  "01-fr-univ-orleans-ezproxy": {
-    "fullName": "Université d'Orléans - EZproxy",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{ezproxy-groups}<[a-zA-Z0-9@.-_%,=+]+>",
-      "Crypted-Fields": "host,login"
-    }
-  },
-  "01-fr-univ-limoges": {
-    "fullName": "Université de Limoges",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %{session}<[a-zA-Z0-9\\-\\+]+> %u %t \"%r\" %s %b %{user}<[a-zA-Z0-9\\-\\+,]+>",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-limoges-02": {
-    "fullName": "Université de Limoges - 2025",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%u;%{ezproxy-session}i;%h;%t;%s;%b;\"%U\";%{statut}<.*?>;%{affectation}<.*?>;%{RNE_composante}<[\\d{7}A-Z]*>;%{label_composante}<.*?>;%{RNE_composante_sec}<[\\d{7}A-Z, ]*>;%{affectation_sec}<.*?>;%{label_composante_sec}<.*?>;%{employeur}<.*?>;%{annee}<[\\d{4}]*>;%{code_etape}<[\\w-]*>;%{label_etape}<.*?>;%{niveau}<.*?>",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-montpellier": {
-    "fullName": "BIU de Montpellier",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %{session}<[a-zA-Z0-9\\-\\+]+> %{type_user}<(?:[a-zA-Z0-9]+\\.)?>%{login}<[a-zA-Z0-9]+> %t \"%r\" %s %b %<[a-zA-Z0-9\\-\\+]+>",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-montpellier-a": {
-    "fullName": "BIU de Montpellier 2018->",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h - %{login}<[a-zA-Z0-9\\-]+> %t \"%r\" %s %b %{ezproxy-groups}<[a-zA-Z0-9\\-]+> %{shib-supannEtablissement}<[\\{\\}a-zA-Z0-9]*> %{shib-eduPersonAffiliation}<[a-zA-Z0-9\\-]*> %<.*>",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-paris-1": {
-    "fullName": "Université Paris 1",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %{session} %u %t \"%r\" %s %b",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-paris-8": {
-    "fullName": "Université Paris 8",
-    "country": "FR",
-    "headers": {
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-paris-8-avt-06-2016": {
-    "fullName": "Université Paris 8 < juin 2016",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h - %u %{group} %{session}<[a-zA-Z0-9\\-\\+]+> %t \"%r\" %s %b %{domain}<[^ ]+>",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-paris-sud-ezproxy": {
-    "fullName": "Université Paris Sud",
-    "country": "FR",
-    "headers": {
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-paris-sud-squid": {
-    "fullName": "Université Paris Sud - Squid",
-    "country": "FR",
-    "headers": {
-      "Log-Format-squid": "%tl %{response_time}<[0-9a-z-A-Z]+> %>a %Ss/%>Hs %<st %rm %ru - %Sh/%<a %mt",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-pec": {
-    "fullName": "Université Paris-Est Créteil (UPEC)",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b - -  %{revue}<[a-zA-Z0-9\\-\\+,]+> %{discipline}<[a-zA-Z0-9\\-\\+,]+> %<.*>",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-pmc": {
-    "fullName": "UPMC - Université Pierre et Marie Curie - Paris 6",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u - %t \"%r\" %s %b %{website}<.*>",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-sorbonne": {
-    "fullName": "Université Paris Sorbonne",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h|%u|%{ezproxy-session}i|%{session-eduPersonAffiliation}<.*?>|%{ezproxy-groups}<[a-zA-Z0-9_+-]+>|%t|\"%r\"|%s|%b|%{domain-port}<[a-zA-Z0-9.-]+:[0-9]+>|%{referer}<.*?>|%{execution-time}<[0-9]+>",
-      "Crypted-Fields": "host,login"
-    }
-  },
-  "01-fr-univ-dauphine": {
-    "fullName": "Université Paris Dauphine",
-    "country": "FR",
-    "headers": {
-      "Log-Format-apache": "%{epoch},%h,%b,%<[\"]?>%{ress-name}<[a-zA-Z0-9 \":,-]+>%<[\"]?>,%U,%>s,%<[\"]?>%{mt}<[a-zA-Z0-9-/ \"=+;]+>%<[\"]?>,%{profil1}<[a-zA-Z0-9-/ \"=+;_]+>,%{uid},%{session-id}",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-vsq": {
-    "fullName": "UVSQ - Université de Versailles St-Quentin-en-Yvelines Bibliopam",
-    "country": "FR",
-    "headers": {
-      "Log-Format-apache": "%{epoch},%h,%b,%{ress-name}<\"?[a-zA-Z0-9-/ �']+\"?>,%U,%>s,%{mt}<[a-zA-Z0-9-/ ;=\".+]+>,%{profil}<.+>,%{uid},%{session-id},",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-vsq-reject-all": {
-    "fullName": "UVSQ - Bibliopam - Reject-all",
-    "country": "FR",
-    "headers": {
-      "Log-Format-apache": "%{epoch},%h,%b,%{ress-name}<\"?[a-zA-Z0-9-/ �']+\"?>,%U,%>s,%{mt}<[a-zA-Z0-9-/ ;=\".+]+>,%{profil}<.+>,%{uid},%{session-id},",
-      "Crypted-Fields": "none",
-      "Reject-Files": "all"
-    }
-  },
-  "01-fr-univ-vhc": {
-    "fullName": "Université de Valenciennes et du Hainaut-Cambrésis",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%{datetime}<[^|]+>|%{session}<[^ ]+>|%h|%U|%{profil}<[a-zA-Z0-9+]+>|%{domain}<[^ ]+>|",
-      "Date-Format": "YYYY/MM/DD:HH:mm:ss",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-lco": {
-    "fullName": "ULCO Université Littoral Cote d'Opale",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h \"%{config}<[^\"]*>\" %u %t %b %U",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-ensam": {
-    "fullName": "ENSAM Arts et Métiers ParisTech",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %u %l %t \"%r\" %s %b %{country_code}<[A-Z]+> %{city}<.*>",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-lille-2": {
-    "fullName": "Université Lille 2",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %{ezproxy-groups}<[a-zA-Z0-9+_]+> %l %u %t \"%r\" %s %b",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-bourgogne": {
-    "fullName": "Université de Bourgogne",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %u %{ezproxy-groups}i %t \"%r\" %s %b %{ufr}<[a-zA-Z0-9\\-]+> %{etape}<[a-zA-Z0-9\\-]+> %{diplome}<[a-zA-Z0-9\\-]+> %{affiliation}<[a-zA-Z0-9]+> %{cursus}<[a-zA-Z0-9\\-\\{\\}]+> %{secteur}<[a-zA-Z0-9\\-\\{\\}]+>",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-univ-jm": {
-    "fullName": "Saint-Étienne - Université Jean Monnet (UJM)",
-    "country": "FR",
-    "headers": {
-      "Log-Format-squid": "%ts.%03tu %6tr %>a %Ss/%03>Hs %<st %rm %ru %[un %Sh/%{last-ip}<.*?> %mt",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-ec-lyon": {
-    "fullName": "EC Lyon Hébergé",
-    "country": "FR",
-    "headers": {
-      "Crypted-Fields": "none",
-      "Request-Charset": "iso-8859-1",
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{xtype}<[^\"]*>\" \"%{referer}<[^\"]*>\" \"%{user-agent}<.*>\" \"%{profil}<.*>\""
-    }
-  },
-  "10-ch-epfl": {
-    "fullName": "École polytechnique fédérale de Lausanne",
-    "country": "CH",
-    "headers": {}
-  },
-  "00-fr-ens-lyon": {
-    "fullName": "Bibliothèque Diderot / ENS Lyon",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %u %{groups}<[a-zA-Z\\+\\.\\-]+> %{ezproxy-session} %t \"%r\" %s %b",
-      "Output-Fields": "-platform,-ezproxy-session,-status,-size",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-mir-ezproxy": {
-    "fullName": "Bibliothèques MIR ezproxy",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %{session}<[a-zA-Z0-9\\-]+> %u %t \"%r\" %s %b %<.*>"
-    }
-  },
-  "01-fr-mir-squid": {
-    "fullName": "Bibliothèques MIR squid",
-    "country": "FR",
-    "headers": {
-      "Log-Format-squid": "%ts.%03tu %6tr %>a %Ss/%03>Hs %<st %rm %ru %[un %Sh/%<a %mt"
-    }
-  },
-  "01-fr-inria": {
-    "fullName": "INRIA",
-    "country": "FR",
-    "headers": {
-      "Log-Format-squid": "%<A:%lp %>a %ui %[un [%tl] \"%rm %ru HTTP/%rv\" %>Hs %<st %<.*>",
-      "Crypted-Fields": "none"
-    }
-  },
-  "00-fr-insp-01": {
-    "fullName": "INSP",
-    "country": "FR",
-    "headers": {
-      "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{EnaDescription}<[^\"]+>\" \"%{EnaDepartment}<[^\"]+>\" \"%{EnaCompany}<[^\"]+>\" \"%{EnaJobTitle}<[^\"]+>\" \"%{EnaCity}<[^\"]+>\" \"%<(?:[a-z]+=)?>%{memberOf0}<[^\"]+>\" \"%<(?:[a-z]+=)?>%{memberOf1}<[^\"]+>\" \"%<(?:[a-z]+=)?>%{memberOf2}<[^\"]+>\" \"%<(?:[a-z]+=)?>%{memberOf3}<[^\"]+>\" \"%<(?:[a-z]+=)?>%{memberOf4}<[^\"]+>\" \"%<(?:[a-z]+=)?>%{memberOf5}<[^\"]+>\" \"%<(?:[a-z]+=)?>%{memberOf6}<[^\"]+>\"",
-      "Crypted-Fields": "host,login"
-    }
-  },
-  "10-us-psu": {
-    "fullName": "Lamson Library - Plymouth State University",
-    "country": "US",
-    "headers": {
-      "Log-Format-ezproxy": "%h %{session}<[a-zA-Z0-9\\-\\+]+> %l %u %t \"%r\" %s %b"
-    }
-  },
-  "10-ie-trinity": {
-    "fullName": "Trinity College Library Dublin",
-    "country": "IE",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{ezproxy-protocol}"
-    }
-  },
-  "10-ca-bpl": {
-    "fullName": "Burnaby Public Library",
-    "country": "CA",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %t \"%r\" %s %b"
-    }
-  },
-  "10-us-vul": {
-    "fullName": "Vanderbilt University Library - Nashville",
-    "country": "US",
-    "headers": {
-      "Log-Format-ezproxy": "%h %{session}<[a-zA-Z0-9\\-\\+]+> %u %t \"%r\" %s %b %{referer}<.*?> %{fullname}<[A-Za-z\\-0-9']*>",
-      "Output-Fields": "+fullname,-referer"
-    }
-  },
-  "10-us-nsc": {
-    "fullName": "Nevada State College - Henderson",
-    "country": "US",
-    "headers": {
-      "Log-Format-ezproxy": "%h %<\\t> %{identd}<[^ ]+> %<\\t> %{login}<[^ ]+> %<\\t> %t %<\\t> \"%r\" %<\\t> %s %<\\t> %b %<\\t> %{ezproxy-session}<[A-Za-z0-9 \\-]+> %<\\t> %{processtime}<[0-9 \\-]+> %<\\t> \"%{referer}<[^ ]+>\" %<\\t> \"%{user-agent}<.*>\" %<\\t> %{ezproxy-platform}<[^ ]+> %<\\t> %{ezproxy-database}<[^ ]+> %{endofline}<.*>",
-      "Crypted-Fields": "none"
-    }
-  },
-  "10-us-uml": {
-    "fullName": "University of Minnesota Libraries",
-    "country": "US"
-  },
-  "10-us-emory": {
-    "fullName": "Emory University",
-    "country": "US",
-    "headers": {
-      "Log-Format-ezproxy": "%h %{ezproxy-session}i %u %t \"%r\" %s %b %{referer}<[^ ]+> %{ezproxy-groups}<[a-zA-Z0-9+]+>"
-    }
-  },
-  "10-us-loy": {
-    "fullName": "Loyola University Chicago",
-    "country": "US",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{referer}<.*?>"
-    }
-  },
-  "10-us-hofs": {
-    "fullName": "Hofstra University",
-    "country": "US",
-    "headers": {
-      "Log-Format-ezproxy": "%{datetime}<\\d{4}/\\d{2}/\\d{2}:\\d{2}:\\d{2}:\\d{2}>%<\\t>%h%<\\t>%u%<\\t>%{ezproxy-spuaccess}%<\\t>%{domain}<[a-z.]+>%<\\t>%U%<\\t>%s%<\\t>%{user-agent}<.*>"
-    }
-  },
-  "10-us-uond": {
-    "fullName": "University of Notre Dame",
-    "country": "US",
-    "headers": {
-      "Log-Format-ezproxy": "%h%<[\t]>%l%<[\t]>%u%<[\t]>%t%<[\t]>\"%r\"%<[\t]>%s%<[\t]>%b%<[\t]>%{rest}<.*>"
-    }
-  },
-  "10-us-uond-old": {
-    "fullName": "University of Notre Dame < 2016",
-    "country": "US",
-    "headers": {
-      "Log-Format-ezproxy": "%h%<\t>%l%<\t>%u%<\t>%t%<\t>%U%<\t>%<\">%{a}%<[^\t]+>%<\">%<\t>%s%<\t>%b%<\t>%{b}%<[^\t]+>%<\t>%<\">%{c}%<[^\t]+>%<\">"
-    }
-  },
-  "10-us-uond-2016-3": {
-    "fullName": "University of Notre Dame 2016-3",
-    "country": "US",
-    "headers": {
-      "Log-Format-ezproxy": "%h%<\t>%l%<\t>%u%<\t>%t%<\t>%U%<\t>\"%r\"%<\t>%s%<\t>%b%<\t>%{origin}<.*>%<\t>%<\">%{ua}<[^\"]+>%<\">"
-    }
-  },
-  "10-sg-nusl": {
-    "fullName": "Singapore Management University",
-    "country": "SG",
-    "headers": {
-      "Log-Format-ezproxy": "%h %u %{user1}<.*> %t \"%r\" %s %b %{referer}<.*>"
-    }
-  },
-  "01-fr-ampt": {
-    "fullName": "Archive ouverte Art et Metier ParisTech",
-    "country": "FR",
-    "headers": {
-      "Force-Parser": "sam",
-      "Output-Fields": "+pid,+robot,+doi,-domain,-eissn,-title,-login,-print_identifier,-online_identifier,-publication_title,-publication_date,-type,-identd",
-      "ezPAARSE-Middlewares": "bot-ua-detector,robots",
-      "ezPAARSE-Enrich": "false",
-      "Disable-Filters": "all",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-uoak": {
-    "fullName": "Univ OAK : Open Access to Knowledge",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %{user}<\"?[0-9a-z-]*\"?> %t \"%r\" %s %b \"%{referer}<[^ ]+>\" \"%{user-agent}<.*>\"",
-      "Force-Parser": "uoak",
-      "Output-Fields": "+pid,+robot,+doi,-domain,-eissn,-title,-login,-print_identifier,-online_identifier,-publication_title,-publication_date,-type,-identd",
-      "ezPAARSE-Middlewares": "bot-ua-detector,robots",
-      "Disable-Filters": "all",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-oatao": {
-    "fullName": "OATAO (Open Archive Toulouse Archive Ouverte)",
-    "country": "FR",
-    "headers": {
-      "Force-Parser": "oatao",
-      "Output-Fields": "+pid,+robot,+doi,-domain,-eissn,-title,-login,-print_identifier,-online_identifier,-publication_title,-publication_date,-type,-identd",
-      "ezPAARSE-Middlewares": "bot-ua-detector,robots",
-      "Disable-Filters": "all",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-angers": {
-    "fullName": "Archive ouverte Université Angers",
-    "country": "FR",
-    "headers": {
-      "Log-Format-apache": "%<[a-zA-Z0-9\\+\\-.:]+> %h %l %u %t \"%r\" %>s %b \"%<[^\"]+>\" \"%<.*>\"",
-      "Force-Parser": "ao",
-      "Output-Fields": "+pid,-domain,-doi,-eissn,-title,-identid",
-      "Crypted-Fields": "none"
-    }
-  },
-  "10-au-sydney": {
-    "fullName": "University of Sydney",
-    "country": "AU",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %{ezproxy-session}<.+?> %{ezproxy-spuaccess}<.+?> %t \"%r\" %s %b \"%{x-forwarded-for}<.+?>\""
-    }
-  },
-  "10-au-rmit": {
-    "fullName": "Melbourne - RMIT University",
-    "country": "AU",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{referer}<.*?>"
-    }
-  },
-  "10-ire-ucd": {
-    "fullName": "University College Dublin Library",
-    "country": "IE",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{user-agent}<.+>\" %{domain}<.+>"
-    }
-  },
-  "01-fr-mines-paristech-squid": {
-    "fullName": "MINES ParisTech squid",
-    "country": "FR",
-    "headers": {
-      "Log-Format-squid": "%ts.%tu %<st %>a %Ss/%>Hs %tr %rm %ru %[un HIER_DIRECT/%<a %mt",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-ro-edulib-museproxy": {
-    "fullName": "MuseKnowledge™ Proxy",
-    "country": "RO",
-    "headers": {
-      "Log-Format-ezproxy": "%{datetime}<\\d{4}\\-\\d{2}\\-\\d{2} \\d{2}:\\d{2}:\\d{2}>.%<\\d{3}> EET NOTICE: []: connection.id=%l %h %<[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+> \"%r\" %s %b",
-      "Accept": "text/tab-separated-values",
-      "COUNTER-Reports": "jr1",
-      "COUNTER-Format": "tsv",
-      "Geoip": "all",
-      "Crypted-Fields": "none"
-    }
-  },
-  "01-fr-enpc": {
-    "fullName": "ENPC - Ecole des Ponts ParisTech",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{unite-ldap}"
-    }
-  },
-  "01-fr-univ-catholille-brut": {
-    "fullName": "Université Catholique de Lille - Format Brut",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %{ezproxy-session}<[a-zA-Z0-9]+> %{from}<[^ ]+> %t \"%r\" %s %b"
-    }
-  },
-  "01-fr-hospices-civil-lyon": {
-    "fullName": "Hospices Civils de Lyon",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%t;%h;%{cs-auth-group}<[^ ]+>;%U;%{s-action}<.*>;%u;%{metier}<[.'_\\-a-zA-Z, ]+>;%{pam}<[\\-a-zA-Z ]+>",
-      "Date-Format": "YYYY-MM-DD HH:mm:ss"
-    }
-  },
-  "01-fr-hospices-civil-lyon-02": {
-    "fullName": "Hospices Civils de Lyon - SGOS-NCSA",
-    "country": "FR",
-    "headers": {
-      "Log-Format-apache": "%h %l %u %t %r %>s %b"
-    }
-  },
-  "01-fr-univ-catholille-enrichis": {
-    "fullName": "Université Catholique de Lille - Format Enrichi",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %{ldap1}<[^ ]+> %{ldap2}<[^ ]+> %{hash}<[^ ]+> %{ezproxy-session}<[a-zA-Z0-9]+> %{from}<[^ ]+> %t \"%r\" %s %b"
-    }
-  },
-  "01-fr-cnam-paris": {
-    "fullName": "Conservatoire national des arts et métiers - Paris",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{ezproxy-session}<.+?> %{ezproxy-groups}<.+?> %{ezproxy-cnam_supannetablissement}<[^ ]*> %{ezproxy-cnam_eduPersonAffiliation}<[^ ]*> %{ezproxy-cnam_edupersonprimaryaffiliation}<[^ ]*>"
-    }
-  },
-  "01-fr-sciences-po-paris": {
-    "fullName": "Sciences Po Paris ez01",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{ezproxy-groups}<.*?>\" \"%{referer}<.*?>\" \"%{user-agent}<.*?>\""
-    }
-  },
-  "01-fr-sciences-po-paris-02": {
-    "fullName": "Sciences Po Paris (avant le 07/07/2021)",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{referer}<.*?>\" \"%{user-agent}<.*?>\" %{ezproxy-session} %{ezproxy-groups}<[a-zA-Z+.-]+> %{affiliation} %{primary-affiliation} %{protocol} %{resource}<[^\\s]*> %{ezproxy-domain}<[a-zA-Z0-9.:-]+>"
-    }
-  },
-  "01-fr-sciences-po-paris-03": {
-    "fullName": "Sciences Po Paris (de 07/2021 à 08/2025)",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %{session-uid}<.*> %u %t \"%r\" %s %b \"%{referer}<.*>\" \"%{user-agent}<.*>\" %{ezproxy-session} %{ezproxy-groups}<.*> %{ezproxy-usrvar1}<.*> %{ezproxy-usrvar2}i %{ezproxy-protocol}i %{ezproxy-url1}<.*> %{v}<.*>"
-    }
-  },
-  "01-fr-sciences-po-lyon": {
-    "fullName": "Sciences Po Lyon",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %t \"%r\" %s %b %<[^\\s]+> <%U>"
-    }
-  },
-  "01-fr-univ-ubs-01": {
-    "fullName": "Université Bretagne Sud",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %l %{session}<.*> - %u - %t \"%r\" %s %b - %<[\\[']{0,2}>%{code_centregestion}<[0-9A-Za-z]*>%<[;]?>%{code_composante}<[0-9]*>%<[;]?>%{code_etape}<[0-9A-Za-z]*>%<[;]?>%<[ville=]{0,6}>%{ville}<[A-Za-z]*>%<[;]?>%<[\\]']{0,2}> %<[- ]*>%<[\\[']?>%{code_structure}<[0-9A-Za-z]*>%<[, ']*>%{code_labo}<[0-9A-Za-z]*>%<[', 0-9A-Za-z\\]]*>",
-      "Crypted-Fields": "host,login"
-    }
-  },
-  "01-fr-univ-bordeaux-01": {
-    "fullName": "Université Bordeaux",
-    "country": "FR",
-    "headers": {
-      "Log-Format-ezproxy": "%h %{ezproxy-session} %u %t \"%r\" %s %b \"%{affiliation}<[a-z:0-9]*>\" \"%{dept}<[0-9]*>\" \"%{labo}<[0-9]*>\" \"%{niveau}<[0-9a-zA-Z]*>\" \"%{college}<[0-9]*>\" \"%{UF}<[0-9]*>\" \"%{etape}<[a-z:0-9]*>\"",
-      "Crypted-Fields": "host,login"
-    }
-  },
-  "01-fr-paris-saclay-01": {
-    "fullName": "Paris-Saclay",
-    "country": "FR",
-    "headers": {
-      "Accept": "text/csv",
-      "Traces-Level": "info",
-      "Log-Format-ezproxy": "%h %l %u %{ezproxy-session}i %t \"%r\" %s %b",
-      "Crypted-Fields": "host,login",
-      "ezPAARSE-Middlewares": "(before cut) populate",
-      "Extract": "login => /(.*)@([^\\.]*)?\\.?([^\\.]*)\\.?(psl)(\\.eu)/ => identifiant, domainName",
-      "populate-fields": "{\"domainName\" : \"psl\"}"
-    }
-  },
-  "01-fr-univ-nc-01": {
-    "fullName": "Université Nouvelle Calédonie",
-    "country": "FR",
-    "headers": {
-      "Accept": "text/csv",
-      "Traces-Level": "info",
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{code_type_ind}<[^ ]*> %{d}<[^ ]*> %{c}<[^ ]*> %{n}<[^ ]*> %{s}<.*>",
-      "Crypted-Fields": "host,login"
-    }
-  },
-  "00-fr-omeka": {
-    "fullName": "Omeka",
-    "country": "FR",
-    "headers": {
-      "Accept": "text/csv",
-      "Force-Parser": "omeka",
-      "Traces-Level": "info",
-      "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b %<\\s*>\"%{referrer}<.*?>\" \"%{user-agent}<.*?>\"",
-      "Crypted-Fields": "host,login",
-      "ezPAARSE-Middlewares": "omeka, populate, user-agent-parser",
-      "Output-Fields": "+ark"
-    }
-  },
-  "00-fr-omekas": {
-    "fullName": "Omekas",
-    "country": "FR",
-    "headers": {
-      "Accept": "text/csv",
-      "Force-Parser": "omekas",
-      "Traces-Level": "info",
-      "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b %<\\s*>\"%{referrer}<.*?>\" \"%{user-agent}<.*?>\"",
-      "Crypted-Fields": "host,login",
-      "Output-Fields": "+ark",
-      "ezPAARSE-Middlewares": "populate, omekas, user-agent-parser"
-    }
-  },
-  "00-fr-doranum": {
-    "fullName": "Doranum",
-    "country": "FR",
-    "headers": {
-      "Accept": "text/csv",
-      "Force-Parser": "doranum",
-      "Traces-Level": "info",
-      "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b %<\\s*>\"%{referrer}<.*?>\" \"%{user-agent}<.*?>\"",
-      "Crypted-Fields": "host,login",
-      "ezPAARSE-Middlewares": "datacite, user-agent-parser"
-    }
-  },
-  "01-fr-open-edition-02": {
-    "fullName": "Open Edition 02",
-    "country": "FR",
-    "headers": {
-      "Accept": "text/csv",
-      "Traces-Level": "info",
-      "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{referer}<.*?>\" \"%{user-agent}<.*?>\" \"%{delivered_content}\"",
-      "Crypted-Fields": "session_id,user_id",
-      "Output-Fields": "-login,-on-campus,-identd,-middlewares,-size,-host,-domain",
-      "ezPAARSE-Middlewares": "session-id",
-      "Reject-Files": "all",
-      "Clean-Only": "0",
-      "oe-ttl": "604800",
-      "oei-ttl": "604800",
-      "oe-cache": "true",
-      "oei-cache": "true",
-      "oe-packet-size": "10",
-      "oei-packet-size": "5",
-      "oe-buffer-size": "100",
-      "oei-buffer-size": "100",
-      "ezPAARSE-Filter-Status": "200,304,401",
-      "oeat-ttl": "604800",
-      "oeat-cache": "true",
-      "oeat-packet-size": "20",
-      "oeat-buffer-size": "100",
-      "filter-platforms": "oe"
-    }
-  },
-  "00-fr-jle": {
-    "fullName": "JLE",
-    "country": "FR",
-    "headers": {
-      "Accept": "text/csv",
-      "Force-Parser": "jle",
-      "Traces-Level": "info",
-      "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{referrer}<.*?>\" \"%{user-agent}<.*?>\" %{response-time}<[0-9.]+> \"%<.*?>\"",
-      "Crypted-Fields": "host,login"
-    }
-  },
-  "00-fr-uco-scolarite": {
-    "fullName": "Université Catholique de l'Ouest",
-    "country": "FR",
-    "headers": {
-      "Accept": "text/csv",
-      "Traces-Level": "info",
-      "Log-Format-ezproxy": "%h %l %l %t \"%r\" %s %b %{etudiant}<[a-zA-Z0-9\\-\\+]+>",
-      "Crypted-Fields": "host,login"
-    }
-  },
-  "00-fr-prairial": {
-    "fullName": "Publications Prairial",
-    "country": "FR",
-    "headers": {
-      "Accept": "text/csv",
-      "Traces-Level": "info",
-      "Crypted-Fields": "host,login",
-      "ezPAARSE-Middlewares": "(before filter) populate",
-      "Populate-Fields": "{ \"domain\": \"publications-prairial.fr\" }"
-    }
-  },
-  "00-fr-prairial-rifrancophonies": {
-    "fullName": "Rifrancophonies",
-    "country": "FR",
-    "headers": {
-      "Accept": "text/csv",
-      "Traces-Level": "info",
-      "Crypted-Fields": "host,login",
-      "ezPAARSE-Middlewares": "(before filter) populate",
-      "Populate-Fields": "{ \"domain\": \"rifrancophonies.com\" }"
-    }
-  },
-  "00-fr-prairial-alyoda": {
-    "fullName": "Alyoda",
-    "country": "FR",
-    "headers": {
-      "Accept": "text/csv",
-      "Traces-Level": "info",
-      "Crypted-Fields": "host,login",
-      "ezPAARSE-Middlewares": "(before filter) populate",
-      "Populate-Fields": "{ \"domain\": \"alyoda.eu\" }"
-    }
-  },
-  "bibliomap": {
-    "fullName": "BIBLIOMAP-BIBCNRS",
-    "country": "FR",
-    "headers": {
-      "Accept": "text/csv",
-      "Traces-Level": "info",
-      "Log-Format-ezproxy": "%h %{ezproxy-session} %l %u %t \"%r\" %s %b %{bib-groups}<[a-zA-Z0-9@\\.\\-_%\\,=\\+]+>",
-      "Crypted-Fields": "login,user",
-      "Output-Fields": "+bib-groups",
-      "ezPAARSE-Middlewares": "ebscohost,populate",
-      "extract": "login => /^([^_]+)_O_([^_]+)_I_([^_]+)_OU_([^_]+)$/ => user,section,department,unit"
-    }
-  }
 }
