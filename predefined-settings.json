@@ -27,11 +27,11 @@
             "extract": "login => /^([^_]+)_O_([^_]+)_I_([^_]+)_OU_([^_]+)$/ => user,section,department,unit"
         }
     },
-    "00-fr-inist-webservices": {
+    "00-fr-istex-tdm-webservices": {
         "fullName": "INIST-CNRS - Webservices (Istex TDM)",
         "country": "FR",
         "headers": {
-            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{referer}<.*?>\" \"%{user-agent}<.*?>\" %{request-id}<\\d+> \"Router-%{container-name}<.*?>@file\" \"%{server-name}<.*?>\" %{elapsed}<[0-9]+>ms",
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{referer}<.*?>\" \"%{user-agent}<.*?>\" %{request-id}<\\d+> \"Router-%{container-name}<.*?>@%<[a-z-]+>\" \"%{server-name}<\\S*?>\" %{elapsed}<[0-9]+>ms",
             "Force-Parser": "istextdm",
             "Double-Click-Removal": "false",
             "ezPAARSE-Filter-Redirects": "false",
