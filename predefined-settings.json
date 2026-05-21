@@ -564,6 +564,14 @@
         "fullName": "Université Paris 8",
         "country": "FR",
         "headers": {
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b %{affiliation}<\\w*> %{libelle_etablissement}<\".*?\"|> %{departement}<\".*?\"|> %{code_etape}<\\w*>",
+            "Crypted-Fields": "none"
+        }
+    },
+    "01-fr-univ-paris-8-avt-03-2026": {
+        "fullName": "Université Paris 8 < Mars 2026",
+        "country": "FR",
+        "headers": {
             "Crypted-Fields": "none"
         }
     },
