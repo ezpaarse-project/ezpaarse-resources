@@ -32,12 +32,16 @@
         "fullName": "INIST-CNRS - Webservices (Istex TDM)",
         "country": "FR",
         "headers": {
+            "Accept": "text/csv",
+            "Force-Parser": "istextdm",
+            "Traces-Level": "info",
             "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{referer}<.*?>\" \"%{user-agent}<.*?>\" %{request-id}<\\d+> \"Router-%{container-name}<[a-z0-9_-]+>@%<[a-z-]+>\" \"%{server-name}<\\S*?>\" %{elapsed}<[0-9]+>ms",
             "Crypted-Fields": "none",
-            "Force-Parser": "istextdm",
+            "Output-Fields": "+sid,+abes-id,+institutionName",
+            "ezPAARSE-Middlewares": "istex-tdm",
             "Double-Click-Removal": "false",
             "ezPAARSE-Filter-Redirects": "false",
-            "Output-Fields": "+sid"
+            "istex-tdm-source-field": "host"
         }
     },
     "00-fr-bibinserm": {
