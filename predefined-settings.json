@@ -38,10 +38,10 @@
             "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{referer}<.*?>\" \"%{user-agent}<.*?>\" %{request-id}<\\d+> \"Router-%{container-name}<[a-z0-9_-]+>@%<[a-z-]+>\" \"%{server-name}<\\S*?>\" %{elapsed}<[0-9]+>ms",
             "Crypted-Fields": "none",
             "Output-Fields": "+sid,+abes-id,+institutionName",
-            "ezPAARSE-Middlewares": "istex-tdm",
+            "ezPAARSE-Middlewares": "ip-to-entity",
             "Double-Click-Removal": "false",
             "ezPAARSE-Filter-Redirects": "false",
-            "istex-tdm-source-field": "host"
+            "ip-to-entity-source-field": "host"
         }
     },
     "00-fr-bibinserm": {
@@ -130,13 +130,13 @@
             "istex-ttl": "3600",
             "Crypted-Fields": "host",
             "crossref-enrich": "false",
-            "ezPAARSE-Middlewares": "(before istex) user-agent-parser | (after istex) cut,ip-to-abesid,idp-to-abesid,abesid-to-etab",
+            "ezPAARSE-Middlewares": "(before istex) user-agent-parser | (after istex) cut,ip-to-institution,idp-to-abesid,abesid-to-institution",
             "Log-Format-apache": "%h %<\"?>%{istex-id}<[^ ]+?>%<\"?> %<\"?>%{owner}<[^\"]+>%<\"?> %<\"?>%{idp}<[^\"]+>%<\"?> %u %t \"%{method}<[A-Z]+> %U %<[^ ]+>\" %{status}<[0-9\\-]+> %b \"%{referer}<[^\"]+>\" \"%{user-agent}<[^\"]+>\" %{sid}<[^ ]+> %<\"?>%{auth}<[^ \"]+>%<\"?>",
             "Output-Fields": "+login,+istex_rtype,+istex_genre,+ark,+publisher_name,+language,+publication_date,+subject,+doi-publication-date-year,+istex_bundle_size,+access_type,+oa_status,+abes-id,+institutionName,-platform,-identd,-domain",
-            "ip-to-abesid-source-field": "host",
-            "ip-to-abesid-enriched-field": "abes-id",
-            "abesid-to-etab-source-field": "abes-id",
-            "abesid-to-etab-enriched-fields": "{ \"Nom Etablissement\": \"institutionName\" }",
+            "ip-to-institution-source-field": "host",
+            "ip-to-institution-enriched-field": "abes-id",
+            "abesid-to-institution-source-field": "abes-id",
+            "abesid-to-institution-enriched-fields": "{ \"Nom Etablissement\": \"institutionName\" }",
             "idp-to-abesid-enriched-field": "abes-id",
             "idp-to-abesid-source-field": "istex-id",
             "extract": "istex-id=>/^(ABES.*)/=>abes-id"
