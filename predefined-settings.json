@@ -111,14 +111,22 @@
         "country": "FR",
         "headers": {
             "EZPAARSE-Filter-Status": "false",
+            "ezPAARSE-Middlewares": "panist,user-agent-parser,cut,ip-to-institution,idp-to-abesid,abesid-to-institution,idp-to-institution",
             "Force-Parser": "panist",
             "panist-enrich": "true",
             "panist-ttl": "3600",
             "Crypted-Fields": "none",
             "crossref-enrich": "false",
-            "ezPAARSE-Middlewares": "panist, user-agent-parser",
+            "ip-to-institution-source-field": "host",
+            "ip-to-institution-enriched-field": "abes-id",
+            "abesid-to-institution-source-field": "abes-id",
+            "abesid-to-institution-enriched-fields": "{ \"Nom Etablissement\": \"institutionName\" }",
+            "idp-to-abesid-enriched-field": "abes-id",
+            "idp-to-abesid-source-field": "istex-id",
+            "idp-to-institution-id-couperin-enriched-field": "abes-id",
+            "extract": "istex-id=>/^(ABES.*)/=>abes-id",
             "Log-Format-apache": "%h %<\"?>%{istex-id}<[^ ]+?>%<\"?> %<\"?>%{owner}<[^\"]+>%<\"?> %<\"?>%{idp}<[^\"]+>%<\"?> %u %t \"%{method}<[A-Z]+> %U %<[^ ]+>\" %{status}<[0-9\\-]+> %b \"%{referer}<[^\"]+>\" \"%{user-agent}<[^\"]+>\" %{sid}<[^ ]+> %<\"?>%{auth}<[^ \"]+>%<\"?>",
-            "Output-Fields": "+login,+istex_rtype,+istex_genre,+ark,-platform,+publisher_name,+language,+publication_date,+subject,-identd,-domain,+doi-publication-date-year,+istex_bundle_size"
+            "Output-Fields": "+login,+istex_rtype,+istex_genre,+ark,-platform,+publisher_name,+language,+publication_date,+subject,-identd,-domain,+doi-publication-date-year,+istex_bundle_size,+abes-id,+institutionName"
         }
     },
     "00-fr-istex": {
