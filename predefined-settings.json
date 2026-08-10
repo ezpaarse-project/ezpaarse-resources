@@ -37,9 +37,10 @@
             "Traces-Level": "info",
             "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{referer}<.*?>\" \"%{user-agent}<.*?>\" %{request-id}<\\d+> \"Router-%{container-name}<[a-z0-9_-]+>@%<[a-z-]+>\" \"%{server-name}<\\S*?>\" %{elapsed}<[0-9]+>ms",
             "Crypted-Fields": "none",
-            "Output-Fields": "+sid,+abes-id,+institutionName",
+            "Output-Fields": "+sid",
             "ip-to-entity-enriched-field": "institutionName",
-            "ezPAARSE-Middlewares": "ip-to-entity",
+            "ezPAARSE-Middlewares": "ip-to-entity, merge-fields",
+            "merge": "container-name+-+unitid=webserviceRequest",
             "Double-Click-Removal": "false",
             "ezPAARSE-Filter-Redirects": "false",
             "ip-to-entity-source-field": "host"
