@@ -124,6 +124,7 @@
             "idp-to-abesid-enriched-field": "abes-id",
             "idp-to-abesid-source-field": "istex-id",
             "idp-to-institution-id-couperin-enriched-field": "abes-id",
+            "idp-to-institution-source-field": "istex-id",
             "extract": "istex-id=>/^(ABES.*)/=>abes-id",
             "Log-Format-apache": "%h %<\"?>%{istex-id}<[^ ]+?>%<\"?> %<\"?>%{owner}<[^\"]+>%<\"?> %<\"?>%{idp}<[^\"]+>%<\"?> %u %t \"%{method}<[A-Z]+> %U %<[^ ]+>\" %{status}<[0-9\\-]+> %b \"%{referer}<[^\"]+>\" \"%{user-agent}<[^\"]+>\" %{sid}<[^ ]+> %<\"?>%{auth}<[^ \"]+>%<\"?>",
             "Output-Fields": "+login,+istex_rtype,+istex_genre,+ark,-platform,+publisher_name,+language,+publication_date,+subject,-identd,-domain,+doi-publication-date-year,+istex_bundle_size,+abes-id,+institutionName"
