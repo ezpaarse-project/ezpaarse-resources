@@ -41,6 +41,7 @@
             "ip-to-entity-enriched-field": "institutionName",
             "ezPAARSE-Middlewares": "ip-to-institution, ip-to-entity, merge-fields",
             "ip-to-institution-source-field": "host",
+            "ip-to-institution-institution-name-enrich": "true",
             "merge": "container-name+-+unitid=webserviceRequest",
             "Double-Click-Removal": "false",
             "ezPAARSE-Filter-Redirects": "false",
