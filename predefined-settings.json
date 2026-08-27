@@ -122,6 +122,7 @@
             "crossref-enrich": "false",
             "ip-to-institution-source-field": "host",
             "ip-to-institution-enriched-field": "abes-id",
+            "ip-to-institution-institution-name-enrich": "true",
             "abesid-to-institution-source-field": "abes-id",
             "abesid-to-institution-enriched-fields": "{ \"Nom Etablissement\": \"institutionName\" }",
             "idp-to-abesid-enriched-field": "abes-id",
