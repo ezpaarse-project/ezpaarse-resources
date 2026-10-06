@@ -489,7 +489,7 @@
         "headers": {
             "Accept": "text/csv",
             "Traces-Level": "info",
-            "Log-Format-ezproxy": "%<.* Ezproxy: >%h %l %u %t \"%r\" %s %b %{ezproxygroups}<[a-zA-Z0-9\\-\\+]+>",
+            "Log-Format-ezproxy": "%<.* Ezproxy: >%h %l %u %t \"%r\" %s %b %{ezproxygroups}<[a-zA-Z0-9\\-\\+\\.]+>",
             "Crypted-Fields": "host,login"
         }
     },
