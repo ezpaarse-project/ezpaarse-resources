@@ -360,7 +360,7 @@
             "Accept": "text/csv",
             "Traces-Level": "info",
             "ezPAARSE-Middlewares": "(only) user-agent-parser, crossref, ezunpaywall, istex, panist",
-            "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{referer}i<.*?>\" \"%{user-agent}i<.*?>\" \"%{user-agent-name}i<.*?>\" \"%{os}i<.*?>\" \"%{institutions}i<.*?>\" \"%{sources}i<.*?>\" \"%{sourcesOption}i<.*?>\" \"%{source}i<.*?>\" \"%{manifestVersion}i<.*?>\" \"%{grantee}i<.*?>\" \"%{doi}i<.*?>\" \"%{pii}i<.*?>\" \"%{pmid}i<.*?>\" \"%{idType}i<.*?>\" \"%{uuid}i<.*?>\" \"%{provider}i<.*?>\""
+            "Log-Format-apache": "%h %l %u %t \"%r\" %>s %b \"%{referer}i<.*?>\" \"%{user-agent}i<.*?>\" \"%{user-agent-name}i<.*?>\" \"%{os}i<.*?>\" \"%{institutions}i<.*?>\" \"%{sources}i<.*?>\" \"%{sourcesOption}i<.*?>\" \"%{source}i<.*?>\" \"%{manifestVersion}i<.*?>\" \"%{grantee}i<.*?>\" \"%{doi}i<.*?>\" \"%{pii}i<.*?>\" \"%{pmid}i<.*?>\" \"%{idType}i<.*?>\" \"%{uuid}i<.*?>\" \"%{provider}i<.*?>\" \"%{sid}i<.*?>\""
         }
     },
     "00-ge-ezproxy-1": {
