@@ -926,6 +926,17 @@
             "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b \"%{user-agent}<.+>\" %{domain}<.+>"
         }
     },
+    "10-th-mahidol": {
+        "fullName": "Mahidol University Library and Knowledge Center",
+        "country": "TH",
+        "headers": {
+            "Accept": "text/csv",
+            "Log-Format-ezproxy": "%h %l %u %t \"%r\" %s %b",
+            "Crypted-Fields": "none",
+            "crossref-on-fail": "ignore",
+            "Reject-Files": "all"
+        }
+    },
     "01-fr-mines-paristech-squid": {
         "fullName": "MINES ParisTech squid",
         "country": "FR",
